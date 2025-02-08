@@ -10,4 +10,4 @@ My Linux repo to document my Linux journey
 - [License](#license)
 
 
-## installation 
+## Installation 
