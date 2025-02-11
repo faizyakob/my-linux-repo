@@ -1,6 +1,0 @@
-
-Background
-
-There are many applications or softwares that you can use for spinning up your own VMs, which will act as node for your Kubernetes cluster. Some of popular applications are Hyper-V Manager (Windows only), VirtualBox, VMWare Fusion and 
-Personally, I prefer VMware Fusion. Previously a paid product, but VMWare has release
-https://blogs.vmware.com/teamfusion/2024/05/fusion-pro-now-available-free-for-personal-use.html
