@@ -35,7 +35,8 @@ Follow the embedded link inside the blog to download a copy and install VMware F
 
 ### Download Ubuntu distro image
 
-Download its ISO image. The downloader should automatically detects your host OS including its CPU architecture, and downloads the correct ISO image. 
+Download the ISO image from link in [Introduction](#introduction).
+The downloader should automatically detects your host OS including its CPU architecture, and downloads the correct ISO image. 
 If it's not, manually search the correct ISO image. 
 At time of writing, the file name are <ins>ubuntu-24.10-desktop-arm64.iso</ins> and <ins>ubuntu-24.10-desktop-amd64.iso</ins> for ARM64 and x64 architecture respectively. 
 
