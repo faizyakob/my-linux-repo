@@ -40,3 +40,8 @@ The downloader should automatically detects your host OS including its CPU archi
 If it's not, manually search the correct ISO image. 
 At time of writing, the file name are <ins>ubuntu-24.10-desktop-arm64.iso</ins> and <ins>ubuntu-24.10-desktop-amd64.iso</ins> for ARM64 and x64 architecture respectively. 
 
+### Load VM onto VMware Fusion
+
+Run VMware Fusion Pro application. 
+
+
