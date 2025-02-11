@@ -42,6 +42,11 @@ At time of writing, the file name are <ins>ubuntu-24.10-desktop-arm64.iso</ins> 
 
 ### Load VM onto VMware Fusion
 
-Run VMware Fusion Pro application. 
+Steps:
+1. Run VMware Fusion Pro application.
+2. Click "New" from the drop down.
+   <img width="1136" alt="Screenshot 2025-02-11 at 15 43 49" src="https://github.com/user-attachments/assets/45257a89-9537-455b-9b93-38defa163329" />
+3. On the _Create a New Virtual Machine_ window, choose the ISO image downloaded earlier.
+   <img width="752" alt="Screenshot 2025-02-11 at 15 44 29" src="https://github.com/user-attachments/assets/d2e8136c-2889-46ec-94d3-03559dae3970" />
 
 
