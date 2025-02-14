@@ -10,7 +10,8 @@
 ### Introduction
 
 In this article, I documented the processes of spinning up a Linux VM using VMware Fusion Pro. 
-We can use alternative tools like Hyper-V manager (Windows), UTM or Parallels, but VMware Fusion is what I am familiar with. 
+VMware Fusion Pro currently only supports MacOS, but if you are on Windows machine, alternative tools are available like Hyper-V manager (Windows), UTM or Parallels. 
+The way to configure a VM on these tools might slightly differ from VMware Fusion. 
 
 We can use any supported Linux distros for the guest OS, but you must be aware of the CPU architecture that your host OS is using. 
 + Windows uses x64-based CPU type.
