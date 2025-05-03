@@ -6,6 +6,7 @@
 - [Load VM onto VMware Fusion](#load-vm-onto-vmware-fusion)
 - [Start the VM](#start-the-vm)
 - [Outro](#outro)
+- [Tips](#tips)
 
 ### Introduction
 
@@ -33,10 +34,10 @@ Following this point, I'll be referring Ubuntu as distro of choice.
 
 ### Download VMware Fusion Pro
 
-Since May 2024, VMware has released VMware Fusion Pro free for personal use : [VMware Fusion Pro: Now Available Free for Personal Use](https://blogs.vmware.com/teamfusion/2024/05/fusion-pro-now-available-free-for-personal-use.html). 
+In May 2024, VMware has released VMware Fusion Pro free for personal use : [VMware Fusion Pro: Now Available Free for Personal Use](https://blogs.vmware.com/teamfusion/2024/05/fusion-pro-now-available-free-for-personal-use.html). 
 > We now provide a Free Personal Use or a Paid Commercial Use subscription for our Pro apps.
 
-Follow the embedded link inside the blog to download a copy and install VMware Fusion Pro. You still need to register though before downloading.
+Follow the embedded link inside the blog to download a copy and install VMware Fusion Pro. You still need to register before downloading.
 
 ### Download Ubuntu distro image
 
@@ -74,7 +75,19 @@ Steps:
 * Steps in this article is not limited to ISO image for Linux distros that provides a GUI. You can also use the steps for CLI-only ISO image. 
 * If you use default configurations of the VM to deploy the VM, you can always modify its properties later, even with the VM's OS already been installed. You might need to shutdown the VM first though.
 * Be very careful when expanding RAM or disk capacity of the VM, as this capacity is taken from the host OS, which might become under-resourced due to this expansion operation.
-* IMPORTANT: VMware Fusion will automatically assign an IP adress using DHCP for each VM. The IP address pool depends on the ISP. Most of the time, IP adress will stick. If it does not, we will need further configuration to make the assinged IP static. TBD.
+
+### Tips
+
+* VMware Fusion will automatically assign an IP adress using DHCP for each VM. The IP address pool depends on the ISP. Most of the time, IP adress will stick. If it does not, we will need further configuration to make the assinged IP static. TBD.
+* For copy and paste from host machine to guess VM, install Open VM tools. Using root user:
+  
+  `apt-get -y upgrade && apt-get -y update`
+  
+  `apt-get install -y open-vm-tools-desktop`
+  
+  `reboot`
+  
+  
    
 
 
