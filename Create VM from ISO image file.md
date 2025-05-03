@@ -74,6 +74,7 @@ Steps:
 * Steps in this article is not limited to ISO image for Linux distros that provides a GUI. You can also use the steps for CLI-only ISO image. 
 * If you use default configurations of the VM to deploy the VM, you can always modify its properties later, even with the VM's OS already been installed. You might need to shutdown the VM first though.
 * Be very careful when expanding RAM or disk capacity of the VM, as this capacity is taken from the host OS, which might become under-resourced due to this expansion operation.
+* IMPORTANT: VMware Fusion will automatically assign an IP adress using DHCP for each VM. The IP address pool depends on the ISP. Most of the time, IP adress will stick. If it does not, we will need further configuration to make the assinged IP static. TBD.
    
 
 
