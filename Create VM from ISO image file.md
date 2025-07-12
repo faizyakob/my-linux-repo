@@ -55,7 +55,9 @@ Steps:
 3. On the _Create a New Virtual Machine_ window, choose the ISO image downloaded earlier.
    <img width="752" alt="Screenshot 2025-02-11 at 15 44 29" src="https://github.com/user-attachments/assets/d2e8136c-2889-46ec-94d3-03559dae3970" />
 4. Click "Customize Settings" if you want to use non-default configurations. Here, you can modify the settings related to the VM like disk capacity, CPU and RAM.
-5. Click "Finish" to proceed.
+   Please note if you intend to create the VM as part of a Kubernetes cluster, recommended to give each VN as much CPU and RAM as possible. Recommended is 2 CPUs and 4GB RAM.
+   For worker nodes, accomodate extra disk spaces for pods' applications.
+6. Click "Finish" to proceed.
    ![image](https://github.com/user-attachments/assets/263f730f-54ee-4314-a06a-9ec92062c770)
 
 ### Start the VM
