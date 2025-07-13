@@ -90,6 +90,10 @@ Steps:
   `apt-get install -y open-vm-tools-desktop`
   
   `reboot`
+
+* Install additional helpful tools like `curl` and text editor:
+
+   `apt-get install -y curl vim`
   
   
    
