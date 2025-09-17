@@ -1,6 +1,7 @@
 ### Table of contents
 
 - [Introduction](#introduction)
+- [Concept](#concept)
 - [Types of mounting in autofs](#types-of-mounting-in-autofs)
 - [Download Ubuntu distro image](#download-ubuntu-distro-image)
 - [Load VM onto VMware Fusion](#load-vm-onto-vmware-fusion)
@@ -40,5 +41,7 @@ Instead of keeping a filesystem mounted all the time, autofs mounts it only when
 
 👉 Example:
 If _/home/users_ is managed by autofs, the directory _/home/users/alice_ won’t be mounted until someone accesses it, and it will unmount automatically later if idle.
+
+### Concept
 
 ### Types of mounting in autofs
