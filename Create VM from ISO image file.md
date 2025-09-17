@@ -17,7 +17,7 @@ The way to configure a VM on these tools might slightly differ from VMware Fusio
 We can use any supported Linux distros for the guest OS, but you must be aware of the CPU architecture that your host OS is using. 
 + Windows uses x64-based CPU type.
 + MacOS with Intel chip uses x64-based CPU type.
-+ MacOS with M1,M2 or M3 chip uses ARM64-based CPU type.
++ MacOS with Mx series (M1,M2, M3 or M4) chip uses ARM64-based CPU type.
 
 The guest OS must be using similar CPU architecture as the host OS. 
 
