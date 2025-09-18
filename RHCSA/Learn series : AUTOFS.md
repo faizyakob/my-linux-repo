@@ -15,7 +15,7 @@ In Linux, **autofs** is a service that automatically mounts and unmounts filesys
 
 Instead of keeping a filesystem mounted all the time, autofs mounts it only when a user or process tries to access it, and automatically unmounts it after a period of inactivity. 
 
-🔑 Key points about autofs:
+🔑 Key points about **autofs**:
 
 + It is controlled by the automount daemon.
 + Uses configuration files like _/etc/auto.master_ and _/etc/auto.*_ to define mount points and rules.
@@ -78,8 +78,28 @@ The specific local filesystem/mountpoint can sync only with the specific remote 
 
 <img width="1028" height="172" alt="image" src="https://github.com/user-attachments/assets/d28d7934-e7b9-4083-b783-ba6ebba72b32" />
 
-In above example, the rermote directory ```/srv/nfs/direct``` will autmoatically get mounted when a client attemps to access local directory ```/mnt/direct```.
+In above sceenshot example, remote directory ```/srv/nfs/direct``` will autmoatically get mounted when a client attemps to access local directory ```/mnt/direct```.
 
 ⚠️ It is important to remember that the local mountpoint ```/mnt/direct``` must already existed before we can use direct mapping.
+
+</details>
+
+<details>
+  <summary> Indirect mapping</summary><br>
+  
+Indirect mapping is a type where you specifcy a remote directory and a "base" mountpoint in the local system. Under this base directory, subdirectories are created automatically as per defined in configuration files. Compares to direct mapping, these subdirectories do not have to be created in advance, as they are created on the fly by **autofs**.
+It is more common style (compared to direct mapping), and widely used in multi-user environment. 
+
+🔑 How indirect Mapping Works
+
+1. You define a base mountpoint (a directory) in _/etc/auto.master_.
+2. A separate map file contains relative keys that expand under that base mountpoint.
+3. When a user accesses one of those subdirectories, **autofs** mounts the corresponding remote filesystem.
+
+Indirect mapping scales better than direct mapping when managing many users or directories.
+
+<img width="1026" height="170" alt="image" src="https://github.com/user-attachments/assets/89676484-50a4-4aef-9535-e6acf32d6aeb" />
+
+In above screenshot example, remote directory ```/srv/nfs/direct``` will autmoatically get mounted when a client attemps to access local directory ```/mnt/direct/share1```. However, ```share1``` mountpoint will be automatically created on the client when user cd into it. 
 
 </details>
