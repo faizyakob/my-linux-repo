@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Concept](#concept)
 - [Types of mapping in autofs](#types-of-mapping-in-autofs)
-- [Download Ubuntu distro image](#download-ubuntu-distro-image)
+- [Configuring autofs](#configuring-autofs)
 - [Load VM onto VMware Fusion](#load-vm-onto-vmware-fusion)
 - [Start the VM](#start-the-vm)
 - [Outro](#outro)
@@ -136,3 +136,5 @@ In above screenshot example, when a user accesses his home directory, the corres
 + Cleaner configuration (than indirect mapping) → One line replaces dozens (or hundreds). 
 
 </details>
+
+### Configuring autofs
