@@ -4,10 +4,6 @@
 - [Concept](#concept)
 - [Types of mapping in autofs](#types-of-mapping-in-autofs)
 - [Configuring autofs](#configuring-autofs)
-- [Load VM onto VMware Fusion](#load-vm-onto-vmware-fusion)
-- [Start the VM](#start-the-vm)
-- [Outro](#outro)
-- [Tips](#tips)
 
 ### Introduction
 
