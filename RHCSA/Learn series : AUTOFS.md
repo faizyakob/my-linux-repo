@@ -67,7 +67,7 @@ We can define 3 types of mapping in autofs:
 Direct mapping means that specific filesystem/mountpoint paths are mapped directly to remote (or local) filesystems without going through a parent "mount directory".
 As such, 🚩absolute paths MUST BE provided when using direct mapping. 
 
-🔑 How Direct Mapping Works
+🔑 How direct mapping Works
 
 1. Uses _/etc/auto.master_ with the special entry ```/-```.
 2. Each entry in the corresponding map file points to an absolute path in the client filesystem.
@@ -87,10 +87,10 @@ In above sceenshot example, remote directory ```/srv/nfs/direct``` will autmoati
 <details>
   <summary> Indirect mapping</summary><br>
   
-Indirect mapping is a type where you specifcy a remote directory and a "base" mountpoint in the local system. Under this base directory, subdirectories are created automatically as per defined in configuration files. Compares to direct mapping, these subdirectories do not have to be created in advance, as they are created on the fly by **autofs**.
+Indirect mapping is a type where you specifcy a remote directory and a "base" mountpoint in the local system. Under this base directory, subdirectories are created automatically as per defined (as keys) in configuration files. Compares to direct mapping, these subdirectories do not have to be created in advance, as they are created on the fly by **autofs**.
 It is more common style (compared to direct mapping), and widely used in multi-user environment. 
 
-🔑 How indirect Mapping Works
+🔑 How indirect mapping Works
 
 1. You define a base mountpoint (a directory) in _/etc/auto.master_.
 2. A separate map file contains relative keys that expand under that base mountpoint.
@@ -100,6 +100,33 @@ Indirect mapping scales better than direct mapping when managing many users or d
 
 <img width="1026" height="170" alt="image" src="https://github.com/user-attachments/assets/89676484-50a4-4aef-9535-e6acf32d6aeb" />
 
-In above screenshot example, remote directory ```/srv/nfs/direct``` will autmoatically get mounted when a client attemps to access local directory ```/mnt/direct/share1```. However, ```share1``` mountpoint will be automatically created on the client when user cd into it. 
+In above screenshot example, remote directory ```/srv/nfs/indirect``` will automatically get mounted when a client attemps to access local directory ```/mnt/direct/share1```. However, ```share1``` mountpoint will be automatically created on the client when user cd into it. 
+
+</details>
+
+</details>
+
+<details>
+  <summary> Wildcard mapping</summary><br>
+
+  Wildcard mapping works almost similarly like indirect mapping, with exception that no keys need to be defined prior in **autofs** configuration files. 
+  Most useful usage of wildcard mapping is in provisioning users' home directories. In this scenario, for example: 
+
+  📍When user alice accesses ```/home/alice``` → **autofs** mounts ```vm2:/export/home/alice```.
+  📍When user bob accesses ```/home/bob``` → **autofs** mounts ```vm2:/export/home/bob```.
+
+  There is no need to hardcode each username as key in **autofs** configuration file. Therefore it works best in environments where server and client username directories are consistent.
+
+🔑 How wildcard mapping works?
+
+1. Instead of defining each mount explicitly (e.g., alice, bob, charlie), you use the wildcard character *.
+2. The * matches any key requested under the base directory.
+3. The & symbol inside the NFS path expands to the same key name.
+
+✅ Advantages
+
++ Scales automatically → No edits required when new users are added on the NFS server.
++ Centralized home directories → Each user’s /home/username is fetched dynamically.
++ Cleaner configuration → One line replaces dozens (or hundreds).
 
 </details>
