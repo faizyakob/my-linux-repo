@@ -73,7 +73,13 @@ As such, 🚩absolute paths MUST BE provided when using direct mapping.
 2. Each entry in the corresponding map file points to an absolute path in the client filesystem.
 3. When a user or process accesses that exact path, **autofs** mounts the target automatically.
 
-Advantages of using direct mapping is it lets you mount filesystems exactly where you want them in the directory tree. This is useful when precise and consistency are required all the time.
-The specific local filesystem/mountpoint can sync only with the specific remote directory defined in the mapping, nothing else. It's more like 1-1 relation.
+Advantages of using direct mapping is that it lets you mount filesystems exactly where you want them in the directory tree. This is useful when precise and consistency are required all the time.
+The specific local filesystem/mountpoint can sync only with the specific remote directory defined in the mapping, nothing else. It's a 1-1 relation.
+
+<img width="1028" height="172" alt="image" src="https://github.com/user-attachments/assets/d28d7934-e7b9-4083-b783-ba6ebba72b32" />
+
+In above example, the rermote directory ```/srv/nfs/direct``` will autmoatically get mounted when a client attemps to access local directory ```/mnt/direct```.
+
+⚠️ It is important to remember that the local mountpoint ```/mnt/direct``` must already existed before we can use direct mapping.
 
 </details>
