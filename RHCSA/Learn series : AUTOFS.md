@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Concept](#concept)
-- [Types of mounting in autofs](#types-of-mounting-in-autofs)
+- [Types of mapping in autofs](#types-of-mapping-in-autofs)
 - [Download Ubuntu distro image](#download-ubuntu-distro-image)
 - [Load VM onto VMware Fusion](#load-vm-onto-vmware-fusion)
 - [Start the VM](#start-the-vm)
