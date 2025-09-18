@@ -40,7 +40,7 @@ Instead of keeping a filesystem mounted all the time, autofs mounts it only when
 </details>
 
 👉 Example:
-If _/home/users_ is managed by autofs, the directory _/home/users/alice_ won’t be mounted until someone accesses it, and it will unmount automatically later if idle.
+If _/home/users_ is managed by **autofs**, the directory _/home/users/alice_ won’t be mounted until someone accesses it, and it will unmount automatically later if idle.
 
 ### Concept
 
