@@ -51,7 +51,27 @@ When a user tries to access a local directory (aka mountpoint) in NFS client, **
 
 This mapping between local mountpoints and remote directories determined how those directories are accessed. Mounting options can be specified similarly as in _/etc/fstab_.
 
+**autofs** uses dedicated configuration files in order to work: _/etc/auto.master_ and/or additional configuration files under drop-in directory _/etc/auto.master.d/_.
 
 ### Types of mapping in autofs
 
-Using autofs, wecan define 3 types of mou
+We can define 3 types of mapping in autofs: 
++ Direct mapping
++ Indirect mapping
++ Wildcard mapping
+
+
+<details>
+  <summary> Direct mapping</summary><br>
+  
+Direct mapping means that specific filesystem paths are mapped directly to remote (or local) filesystems without going through a parent "mount directory".
+
+🔑 How Direct Mapping Works
+
+1. Uses _/etc/auto.master_ with the special entry ```/-```.
+2. Each entry in the corresponding map file points to an absolute path in the client filesystem.
+3. When a user or process accesses that exact path, **autofs** mounts the target automatically.
+
+Advantages of using direct mapping are
+
+</details>
