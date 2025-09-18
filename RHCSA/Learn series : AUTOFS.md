@@ -26,7 +26,7 @@ Instead of keeping a filesystem mounted all the time, autofs mounts it only when
 <details>
   <summary> Advantages</summary><br>
   
-✅ No manual entries required in /etc/fstab – avoiding error-prone editing, simplifies configuration and reduces static mount dependencies.
+✅ No manual entries required in _/etc/fstab_ – avoiding error-prone editing, simplifies configuration and reduces static mount dependencies.
 
 ✅ Wildcard mounting for multi-user environments – automatically mounts each user’s home directory from an NFS server, enabling centralized control and easy distribution of shared resources.
 
