@@ -64,7 +64,8 @@ We can define 3 types of mapping in autofs:
 <details>
   <summary> Direct mapping</summary><br>
   
-Direct mapping means that specific filesystem paths are mapped directly to remote (or local) filesystems without going through a parent "mount directory".
+Direct mapping means that specific filesystem/mountpoint paths are mapped directly to remote (or local) filesystems without going through a parent "mount directory".
+As such, 🚩absolute paths MUST BE provided when using direct mapping. 
 
 🔑 How Direct Mapping Works
 
@@ -72,6 +73,7 @@ Direct mapping means that specific filesystem paths are mapped directly to remot
 2. Each entry in the corresponding map file points to an absolute path in the client filesystem.
 3. When a user or process accesses that exact path, **autofs** mounts the target automatically.
 
-Advantages of using direct mapping are
+Advantages of using direct mapping is it lets you mount filesystems exactly where you want them in the directory tree. This is useful when precise and consistency are required all the time.
+The specific local filesystem/mountpoint can sync only with the specific remote directory defined in the mapping, nothing else. It's more like 1-1 relation.
 
 </details>
