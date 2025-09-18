@@ -112,7 +112,7 @@ In above screenshot example, remote directory ```/srv/nfs/indirect``` will autom
   Wildcard mapping works almost similarly like indirect mapping, with exception that no keys need to be defined prior in **autofs** configuration files. 
   Most useful usage of wildcard mapping is in provisioning users' home directories. In this scenario, for example: 
 
-  📍When user alice accesses ```/home/alice``` → **autofs** mounts ```vm2:/export/home/alice```.
+  📍When user alice accesses ```/home/alice``` → **autofs** mounts ```vm2:/export/home/alice```.<br>
   📍When user bob accesses ```/home/bob``` → **autofs** mounts ```vm2:/export/home/bob```.
 
   There is no need to hardcode each username as key in **autofs** configuration file. Therefore it works best in environments where server and client username directories are consistent.
@@ -122,6 +122,12 @@ In above screenshot example, remote directory ```/srv/nfs/indirect``` will autom
 1. Instead of defining each mount explicitly (e.g., alice, bob, charlie), you use the wildcard character *.
 2. The * matches any key requested under the base directory.
 3. The & symbol inside the NFS path expands to the same key name.
+
+<img width="1034" height="172" alt="image" src="https://github.com/user-attachments/assets/02508959-2a2e-4127-8c7f-c12ecee8da22" />
+
+In above screenshot example, when a user accesses his home directory, the corresponding directory on NFS sever is mounted. **autofs** will use the username to map it to correct directory. 
+
+⚠️ Things to note : If a user directory doesn’t exist on the NFS server, the path still shows up but will fail on access.
 
 ✅ Advantages
 
