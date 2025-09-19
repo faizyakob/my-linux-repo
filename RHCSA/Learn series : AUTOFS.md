@@ -143,7 +143,14 @@ Configurations are required on both VMs:
   + On VM-2, **nfs-server**, **mountd** and **rpcbind** services needs to be installed and running. In addition, **firewalld** needs to whitelist those services ports so NFS client can access those services.
     Whitelist similar ports in **ufw** if you are using Ubuntu.
 
+<details>
+  <summary> VM-2</summary><br>
+  
+1. Install and enable the ```nfs-server``` package.
+   > The nfs-server package .
 
+2. 
+</details>
 
 
 
