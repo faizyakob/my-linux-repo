@@ -169,7 +169,7 @@ Configurations are required on both VMs:
 
      Output also displays the NFS version currently in used. Often, both NFSv3 and NFSv4 are running on port 2049. 
 
-3. Whitelist the services or ports in firewall.
+2. Whitelist the services or ports in firewall.
    If access is not opened, NFS client won't be able to reach above services.
 
     As root user, run:
@@ -187,9 +187,21 @@ Configurations are required on both VMs:
    firewall-cmd --list-ports
    ```
    <img width="446" height="76" alt="image" src="https://github.com/user-attachments/assets/58e20f95-c211-4939-8a1b-9691f38f2cf3" /><br>
- 
-   
 
+ 3. Create directories and includes them in ```/etc/exports```.
+    NFS uses ```/etc/exports``` file to expose the directories for mounting.
+
+    Create 3 directories, each to showcase different type of mapping.
+    > Note: We assumed user1 and user2 exist on VM-2. If not, create them and note their UID.
+
+    ```
+    mkdir -p /srv/nfs/direct
+    mkdir -p /srv/nfs/indirect
+    mkdir -p /srv/nfs/home/{user1,user2}
+    ```
+    Give appropriat permission for those directories.
+    For demo purposes, we let 
+    
    
 </details>
 
