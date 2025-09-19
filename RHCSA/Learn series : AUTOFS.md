@@ -148,26 +148,26 @@ Configurations are required on both VMs:
   <summary> VM-2</summary><br>
   
 1. Install and enable the ```nfs-server``` package.
-   Ports used by nfs-server is 2049, while for rpcbind is 111.
-   Port for mountd varies, but usually it is 20048.
-   > In RHEL-based distro, nfs-server package also includes rpcbind and mountd. There is no need for separate packages install.
+     Ports used by nfs-server is 2049, while for rpcbind is 111.
+     Port for mountd varies, but usually it is 20048.
+     > In RHEL-based distro, nfs-server package also includes rpcbind and mountd. There is no need for separate packages install.
 
-   As root user, run:
+     As root user, run:
 
-   ```
-   dnf install -y nfs-utils
-   systemctl enable --now nfs-utils
-   systemctl status nfs-server
-   ```
-  <img width="1264" height="268" alt="image" src="https://github.com/user-attachments/assets/9ae88409-7c2e-4432-8016-5ab2852c6c70" /><br>
+     ```
+     dnf install -y nfs-utils
+     systemctl enable --now nfs-utils
+     systemctl status nfs-server
+     ```
+    <img width="1264" height="268" alt="image" src="https://github.com/user-attachments/assets/9ae88409-7c2e-4432-8016-5ab2852c6c70" /><br>
 
-   To check the ports are successfully listening, run:
-   ```
-   rpcinfo -p
-   ```
-   <img width="402" height="358" alt="image" src="https://github.com/user-attachments/assets/71ad7161-0715-437b-a974-f268de0700c5" /><br>
+     To check the ports are successfully listening, run:
+     ```
+     rpcinfo -p
+     ```
+     <img width="402" height="358" alt="image" src="https://github.com/user-attachments/assets/71ad7161-0715-437b-a974-f268de0700c5" /><br>
 
-   Output also displays the NFS version currently in used. Often, both NFSv3 and NFSv4 are running on port 2049. 
+     Output also displays the NFS version currently in used. Often, both NFSv3 and NFSv4 are running on port 2049. 
 
 3. Whitelist the services or ports in firewall.
    If access is not opened, NFS client won't be able to reach above services.
