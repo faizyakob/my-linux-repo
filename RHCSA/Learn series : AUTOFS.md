@@ -159,17 +159,36 @@ Configurations are required on both VMs:
    systemctl enable --now nfs-utils
    systemctl status nfs-server
    ```
-  <img width="1264" height="268" alt="image" src="https://github.com/user-attachments/assets/9ae88409-7c2e-4432-8016-5ab2852c6c70" />
+  <img width="1264" height="268" alt="image" src="https://github.com/user-attachments/assets/9ae88409-7c2e-4432-8016-5ab2852c6c70" /><br>
 
    To check the ports are successfully listening, run:
    ```
    rpcinfo -p
    ```
-   <img width="402" height="358" alt="image" src="https://github.com/user-attachments/assets/71ad7161-0715-437b-a974-f268de0700c5" />
+   <img width="402" height="358" alt="image" src="https://github.com/user-attachments/assets/71ad7161-0715-437b-a974-f268de0700c5" /><br>
 
-   Output also displays the NFS version currently in used. Often both NFSv3 and NFSv4 are running.
+   Output also displays the NFS version currently in used. Often, both NFSv3 and NFSv4 are running on port 2049. 
 
-3. Whitelist the
+3. Whitelist the services or ports in firewall.
+   If access is not opened, NFS client won't be able to reach above services.
+
+    As root user, run:
+
+   ```
+   firewall-cmd --add-service=nfs --permanent
+   firewall-cmd --add-port=111/tcp --add-port=2049/tcp --add-port=20048/tcp --permanent
+   firewall-cmd --reload
+   ```
+
+   List the services and port to ensure successful addition.
+
+    ```
+   firewall-cmd --list-services
+   firewall-cmd --list-ports
+   ```
+   <img width="446" height="76" alt="image" src="https://github.com/user-attachments/assets/58e20f95-c211-4939-8a1b-9691f38f2cf3" /><br>
+ 
+   
 
    
 </details>
