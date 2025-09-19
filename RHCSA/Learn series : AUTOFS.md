@@ -227,7 +227,9 @@ Configurations are required on both VMs:
      + /srv/nfs/direct       *(rw,sync,no_subtree_check,no_root_squash)
      + /srv/nfs/indirect     *(rw,sync,no_subtree_check,no_root_squash)
      + /srv/nfs/home         *(rw,sync,no_subtree_check,no_root_squash)
-    
+       
+     > We can replace the * with specific IP address in CIDR format. Usual mounting options are defined in brackets.
+     
      Restart nfs-server service, and check export status.
    
      ```
@@ -240,6 +242,54 @@ Configurations are required on both VMs:
 
      <img width="968" height="99" alt="image" src="https://github.com/user-attachments/assets/29fe8673-0d17-46e4-9f3b-4fc944322a55" />
 
+</details>
+
+<details>
+  <summary> VM-1</summary><br>
+
+NFS client is where the mountpoints will be defined. **autofs** will alleviate the tasks of mounting the filesystem, which normally requires manual configurations. Note that while **autofs** itself is a separate program that manages the automatic mounting of directories, it relies on the underlying NFS client tools to perform the actual mounting of NFS shares. 
+
+Note that there is no need for **nfs-server** service to be running on the client. 
+
+We'll be using ```/mnt``` subdirectories as demo for the direct & indirect mapping mountpoints. For wildcard mapping, we'll be using user1 & user2 ```/home``` directories.
+
+Run the following commands as root user.
+
+1. Install required packages:
+   ```
+   apt update
+   dnf install -y nfs-utils autofs
+   ```
+   > For Ubuntu, **nfs-common** is used instead of **nfs-utils**.
+   
+2.  Enable autofs service:
+     ```
+     systemctl enable --now autofs
+     systemctl status autofs
+     ```
+     <img width="1212" height="342" alt="image" src="https://github.com/user-attachments/assets/809af98b-7549-4fe0-9958-1c789555f4a5" /><br>
+
+3.  Check NFS client is aware of the exposed directories on NFS server.
+
+     ```
+     showmount -e vm-2
+     ```
+     It will output the directories on NFS server available to be mounted, as defined in ```/etc/exports``` on NFS server.
+     Also this implies firewall whitelisting is working fine.
+    
+      <img width="328" height="92" alt="image" src="https://github.com/user-attachments/assets/e3e3ac93-50a4-4701-9881-c90cd5335124" /><br>
+ 
+5.  Create /mnt subdirectories.
+     ```
+     mkdir -p /mnt/direct
+     mkdir -p /mnt/indirect
+     ```
+     
+7.  Edit **autofs** configuration files.
+     This is the most immportant step, as it defines how the mapping will happen.
+    
+9.  
+ 
 </details>
 
 
