@@ -137,6 +137,7 @@ In above screenshot example, when a user accesses his home directory, the corres
 
 Let's walkthrough simple configurations to showcase **autofs** functionality, using two demo VMs, VM-1 and VM-2. 
 VM-1 will act as NFs client, while VM-2 as NFS server.
+NFS has few versions, but commonly used are NFSv3 and NFSv4. 
 
 Configurations are required on both VMs:
   + On VM-1, **autofs** service needs to be installed and running.
@@ -147,9 +148,12 @@ Configurations are required on both VMs:
   <summary> VM-2</summary><br>
   
 1. Install and enable the ```nfs-server``` package.
-   > The nfs-server package .
+   Ports used by nfs
+   > In RHEL-based distro, nfs-server package also includes rpcbind and mountd. There is no need for separate packages install. 
 
-2. 
+3. Whitelist the
+
+   
 </details>
 
 
