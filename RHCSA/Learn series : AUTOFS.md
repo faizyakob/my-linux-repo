@@ -249,7 +249,7 @@ Configurations are required on both VMs:
 
 NFS client is where the mountpoints will be defined. **autofs** will alleviate the tasks of mounting the filesystem, which normally requires manual configurations. Note that while **autofs** itself is a separate program that manages the automatic mounting of directories, it relies on the underlying NFS client tools to perform the actual mounting of NFS shares. 
 
-Note that there is no need for **nfs-server** service to be running on the client. 
+🚧 Note that there is no need for **nfs-server** service to be running on NFS client. In fact, it MUST BE disabled, otherwise it will interfere with **autofs** service.
 
 We'll be using ```/mnt``` subdirectories as demo for the direct & indirect mapping mountpoints. For wildcard mapping, we'll be using user1 & user2 ```/home``` directories.
 
@@ -274,8 +274,8 @@ Run the following commands as root user.
      ```
      showmount -e vm-2
      ```
-     It will output the directories on NFS server available to be mounted, as defined in ```/etc/exports``` on NFS server.
-     Also this implies firewall whitelisting is working fine.
+     It will output the directories on NFS server available to be mounted, as defined in ```/etc/exports```.
+     Also, this implies firewall whitelisting is working fine.
     
       <img width="328" height="92" alt="image" src="https://github.com/user-attachments/assets/e3e3ac93-50a4-4701-9881-c90cd5335124" /><br>
  
@@ -287,8 +287,61 @@ Run the following commands as root user.
      
 7.  Edit **autofs** configuration files.
      This is the most immportant step, as it defines how the mapping will happen.
-    
-9.  
+
+     + #### /etc/auto.master<br>
+       The main **autofs** configuration file. It's the entry point where type of mapping is defined.
+       For direct mapping, symbol ```/-``` is used. <br>
+       For indirect mapping, the base mountpoint is defined. <br>
+       For wildcard mapping, base home directory is used. <br>
+       > We assumed the default value ```/home``` from useradd.<br>
+       
+       Enter the following entries in ```/etc/auto.master``` file, each on separate line.
+        ```
+        /-                   /etc/auto.direct
+        /mnt/indirect        /etc/auto.indirect
+        /home                /etc/auto.home
+        ```
+        
+       Each entry is pointing to a file, where further configurations are added.
+       Create all these files before proceeding with next step.
+
+       > Alternatively, you can use autofs /etc/auto.master.d/ drop-in directory. Only difference is that each line above will be inside a separate file:<br>
+       > /etc/auto.master.d/direct.autofs <br>
+       > /etc/auto.master.d/indirect.autofs <br>
+       > /etc/auto.master.d/wildcard.autofs <br>
+
+    + #### /etc/auto.direct<br>
+      Enter following entry in this file:
+      
+      ```
+      /mnt/direct   vm-2:/srv/nfs/direct
+      ```
+
+      The meaning of this entry is that ```/mnt/direct``` will be the local mountpoint for the remote directory ```/srv/nfs/direct``` on NFS server.
+
+    + #### /etc/auto.indirect<br>
+      Enter following entry in this file:
+
+      ```
+      share1   nvm-2:/srv/nfs/indirect
+      ```
+
+      The meaning of this entry is that ```/mnt/direct/share1``` will be the local mountpoint for the remote directory ```/srv/nfs/indirect``` on NFS server.<br>
+      💡 Note that we did not create ```share1``` subdirectory prior. **autofs** will take care of this. 
+
+    + #### /etc/auto.home<br>
+      Enter following entry in this file:
+
+      ```
+      *   vm-2:/srv/nfs/home/&
+      ```
+
+      Symbol ```*``` is used, to represent anything as the subdirectory on local mountpoint, and ```&``` instruct autofs to map its corresponding directory on NFS server.<br>
+      For example: <br>
+      If ```/home/user1``` is accessed, autofs will mount ```srv/nfs/home/user1```. <br>
+      If ```/home/user2``` is accessed, autofs will mount ```srv/nfs/home/user2```. <br>
+
+6.  
  
 </details>
 
