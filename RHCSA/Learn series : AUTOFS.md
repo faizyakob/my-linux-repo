@@ -134,3 +134,16 @@ In above screenshot example, when a user accesses his home directory, the corres
 </details>
 
 ### Configuring autofs
+
+Let's walkthrough simple configurations to showcase **autofs** functionality, using two demo VMs, VM-1 and VM-2. 
+VM-1 will act as NFs client, while VM-2 as NFS server.
+
+Configurations are required on both VMs:
+  + On VM-1, **autofs** service needs to be installed and running.
+  + On VM-2, **nfs-server**, **mountd** and **rpcbind** services needs to be installed and running. In addition, **firewalld** needs to whitelist those services ports.
+    Note if you are using Ubuntu, whitelist similar ports in **ufw**.
+
+
+
+
+
