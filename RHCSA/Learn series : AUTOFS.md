@@ -171,12 +171,20 @@ Configurations are required on both VMs:
 
 2. Whitelist the services or ports in firewall.
    If access is not opened, NFS client won't be able to reach above services.
-
+   
+    We can either add the services, or the ports they are using to **firewalld** configurations.
+   
     As root user, run:
 
    ```
-   firewall-cmd --add-service=nfs --permanent
-   firewall-cmd --add-port=111/tcp --add-port=2049/tcp --add-port=20048/tcp --permanent
+   firewall-cmd --add-service=nfs --add-service=mountd --add-service=rpc-bind --permanent
+   firewall-cmd --reload
+   ```
+   
+   Alternatively, use port numbers:
+   
+   ```
+   firewall-cmd --add-port=111/tcp --add-port=20048/tcp --add-port=2049/tcp  --permanent
    firewall-cmd --reload
    ```
 
@@ -188,7 +196,7 @@ Configurations are required on both VMs:
    ```
    <img width="446" height="76" alt="image" src="https://github.com/user-attachments/assets/58e20f95-c211-4939-8a1b-9691f38f2cf3" /><br>
 
- 3. Create directories and includes them in ```/etc/exports```.
+ 4. Create directories and includes them in ```/etc/exports```.
     NFS uses ```/etc/exports``` file to expose the directories for mounting.
 
     Create 3 directories, each to showcase different type of mapping.
@@ -199,10 +207,39 @@ Configurations are required on both VMs:
     mkdir -p /srv/nfs/indirect
     mkdir -p /srv/nfs/home/{user1,user2}
     ```
-    Give appropriat permission for those directories.
-    For demo purposes, we let 
+    Give appropriat permission for those directories. For demo purposes, we allow all access.
+
+    ```
+    chmod -R 755 /srv/nfs
+    chown -R nobody:nobody /srv/nfs
+    ```
+
+    In real enviornment, we probably wants to limit who can access which directories.
+
+    ```
+    chmod -R 755 /srv/nfs
+    chown user1:user1 /srv/nfs/home/user1
+    chown user2:user2 /srv/nfs/home/user2
+    ```
     
+   Add following entries in ```/etc/exports``` file, each on separate line.
+
+   + /srv/nfs/direct       192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
+   + /srv/nfs/indirect     192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
+   + /srv/nfs/home         192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
+    
+   Restart nfs-server service, and check export status.
    
+   ```
+   systemctl restart nfs-server
+   exportfs -v
+   ```
+
+   If done correctly, the service should display which directories are mountable. 
+   In our case, the above 3 directories.
+
+   <img width="968" height="99" alt="image" src="https://github.com/user-attachments/assets/29fe8673-0d17-46e4-9f3b-4fc944322a55" />
+
 </details>
 
 
