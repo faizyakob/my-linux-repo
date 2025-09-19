@@ -3,7 +3,8 @@
 - [Introduction](#introduction)
 - [Concept](#concept)
 - [Types of mapping in autofs](#types-of-mapping-in-autofs)
-- [Configuring autofs](#configuring-autofs)
+- [Configuring autofs service](#configuring-autofs-service)
+- [Test autofs service](#test-autofs-service)
 
 ### Introduction
 
@@ -133,7 +134,7 @@ In above screenshot example, when a user accesses his home directory, the corres
 
 </details>
 
-### Configuring autofs
+### Configuring autofs service
 
 Let's walkthrough simple configurations to showcase **autofs** functionality, using two demo VMs, VM-1 and VM-2. 
 VM-1 will act as NFs client, while VM-2 as NFS server.
@@ -341,7 +342,7 @@ Run the following commands as root user.
       If ```/home/user1``` is accessed, autofs will mount ```srv/nfs/home/user1```. <br>
       If ```/home/user2``` is accessed, autofs will mount ```srv/nfs/home/user2```. <br>
 
-6.  Restart autofs service.
+6.  Restart **autofs** service.
 
      ```
      systemctl restart autofs
