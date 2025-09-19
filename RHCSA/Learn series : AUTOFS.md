@@ -222,23 +222,23 @@ Configurations are required on both VMs:
     chown user2:user2 /srv/nfs/home/user2
     ```
     
-   Add following entries in ```/etc/exports``` file, each on separate line.
+     Add following entries in ```/etc/exports``` file, each on separate line.
 
-   + /srv/nfs/direct       192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
-   + /srv/nfs/indirect     192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
-   + /srv/nfs/home         192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
+     + /srv/nfs/direct       *(rw,sync,no_subtree_check,no_root_squash)
+     + /srv/nfs/indirect     *(rw,sync,no_subtree_check,no_root_squash)
+     + /srv/nfs/home         *(rw,sync,no_subtree_check,no_root_squash)
     
-   Restart nfs-server service, and check export status.
+     Restart nfs-server service, and check export status.
    
-   ```
-   systemctl restart nfs-server
-   exportfs -v
-   ```
+     ```
+     systemctl restart nfs-server
+     exportfs -v
+     ```
 
-   If done correctly, the service should display which directories are mountable. 
-   In our case, the above 3 directories.
+     If done correctly, the service should display which directories are mountable. 
+     In our case, the above 3 directories.
 
-   <img width="968" height="99" alt="image" src="https://github.com/user-attachments/assets/29fe8673-0d17-46e4-9f3b-4fc944322a55" />
+     <img width="968" height="99" alt="image" src="https://github.com/user-attachments/assets/29fe8673-0d17-46e4-9f3b-4fc944322a55" />
 
 </details>
 
