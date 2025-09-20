@@ -43,13 +43,13 @@ If _/home/users_ is managed by **autofs**, the directory _/home/users/alice_ won
 ### Concept
 
 When a user tries to access a local directory (aka mountpoint) in NFS client, **autofs** service will automatically mount the corresponding directory that is mapped on the NFS server for the user. 
-**autofs** utilizes few Systemd services for this: mountd, nfs-server and rpcbind. Therefore, these services and their ports need to be running and opened respectively on the NFS server.
+**autofs** utilizes few Systemd services for this: **mountd**, **nfs-server** and **rpcbind**. Therefore, these services and their ports need to be running and opened respectively on the NFS server.
 
 <img width="1042" height="300" alt="image" src="https://github.com/user-attachments/assets/9400e4cf-3fa5-4729-88bb-f33731e08e41" />
 
 This mapping between local mountpoints and remote directories determined how those directories are accessed. Mounting options can be specified similarly as in _/etc/fstab_.
 
-**autofs** uses dedicated configuration files in order to work: _/etc/auto.master_ and/or additional configuration files under drop-in directory _/etc/auto.master.d/_.
+**autofs** uses dedicated configuration files in order to work: ```/etc/auto.master``` and/or additional configuration files under drop-in directory ```/etc/auto.master.d/```.
 
 ### Types of mapping in autofs
 
