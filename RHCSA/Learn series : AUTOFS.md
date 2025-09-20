@@ -47,7 +47,7 @@ When a user tries to access a local directory (aka mountpoint) in NFS client, **
 
 <img width="1042" height="300" alt="image" src="https://github.com/user-attachments/assets/9400e4cf-3fa5-4729-88bb-f33731e08e41" />
 
-This mapping between local mountpoints and remote directories determined how those directories are accessed. Mounting options can be specified similarly as in _/etc/fstab_.
+This mapping between local mountpoints and remote directories determined how those directories are accessed. Mounting options can be specified similarly as in ```/etc/fstab```.
 
 **autofs** uses dedicated configuration files in order to work: ```/etc/auto.master``` and/or additional configuration files under drop-in directory ```/etc/auto.master.d/```.
 
