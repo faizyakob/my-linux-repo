@@ -5,6 +5,7 @@
 - [Types of mapping in autofs](#types-of-mapping-in-autofs)
 - [Configuring autofs service](#configuring-autofs-service)
 - [Test autofs service](#test-autofs-service)
+- [Tips and outro](#tips-and-outro)
 
 ### Introduction
 
@@ -386,7 +387,7 @@ Once we have configured **autofs** in previous section, let's try it.
       <img width="494" height="100" alt="image" src="https://github.com/user-attachments/assets/60bbf357-f175-4249-87bd-9072c52a4b14" /><br>
       <img width="686" height="130" alt="image" src="https://github.com/user-attachments/assets/8b170bfe-1eff-4eb9-9687-04981b0aca54" /><br>
 
-      **autofs** takes care of mounting the correct remote directories, using the username as the key. This is useful when centralized home directories is necessary to provide stricter control.<br>
+      **autofs** takes care of mounting the correct remote directories, using the username as the key. <br>
 
       We can verify **autofs** is at work by verifyign the current mount usage.<br>
       ```
@@ -395,7 +396,13 @@ Once we have configured **autofs** in previous section, let's try it.
      
       <img width="1292" height="206" alt="image" src="https://github.com/user-attachments/assets/e0a4b2ec-320a-4d4f-ae33-1620471ada4e" />
 
+### Tips and outro
 
+**autofs** is used for automating the mounting of filesystems. It is most useful in multi-user environment where there are many directories mounting tasks to handle, which becoming repetitive over time. It also provides some automation with wildcard mapping, when centralized home directories is necessary to provide stricter control.
+
+Tips:
+1. If you are unable to change directory into the mountpoints, check the directory permission on the NFS server.
+2. If solely using NFSv4, both **mountd** and **nfs-server** services share port 2049, so there are only 2 ports to be whitelisted. 
 
 
 
