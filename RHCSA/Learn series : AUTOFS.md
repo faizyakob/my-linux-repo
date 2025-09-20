@@ -138,7 +138,7 @@ In above screenshot example, when a user accesses his home directory, the corres
 ### Configuring autofs service
 
 Let's walkthrough simple configurations to showcase **autofs** functionality, using two demo VMs, VM-1 and VM-2. 
-VM-1 will act as NFs client, while VM-2 as NFS server.
+VM-1 will act as NFS client, while VM-2 as NFS server.
 NFS has few versions, but commonly used are NFSv3 and NFSv4, in which both are running simultaneuosly for backward compatibility. 
 
 Configurations are required on both VMs:
