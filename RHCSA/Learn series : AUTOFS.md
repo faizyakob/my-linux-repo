@@ -280,13 +280,13 @@ Run the following commands as root user.
     
       <img width="328" height="92" alt="image" src="https://github.com/user-attachments/assets/e3e3ac93-50a4-4701-9881-c90cd5335124" /><br>
  
-5.  Create /mnt subdirectories.
+4.  Create /mnt subdirectories.
      ```
      mkdir -p /mnt/direct
      mkdir -p /mnt/indirect
      ```
      
-7.  Edit **autofs** configuration files.
+5.  Edit **autofs** configuration files.
      This is the most immportant step, as it defines how the mapping will happen.
 
      + #### /etc/auto.master<br>
@@ -347,23 +347,26 @@ Run the following commands as root user.
      ```
      systemctl restart autofs
      ```
+     
 </details>
      
-7.  Test the service.
+### Test autofs service
 
-    + Direct mapping
+Once we have configured **autofs** in previous section, let's try it. 
+
+  + Direct mapping
       Change directory to ```/mnt/direct```, and create a test file. <br>
       This file should be visible in NFS server's ```/srv/nfs/direct``` directory and vice versa.<br>
       <img width="440" height="60" alt="image" src="https://github.com/user-attachments/assets/fe33fbb5-5f2e-4c00-8367-280e3786db51" /><br>
       <img width="572" height="60" alt="image" src="https://github.com/user-attachments/assets/6b8a2bc8-0e50-4951-80f2-139e90f9a20b" /><br>
 
-    + Indirect mapping
+  + Indirect mapping
       Change directory to ```/mnt/indirect/share1```, and create a test file. <br>
       This file should be visible in NFS server's ```/srv/nfs/indirect``` directory and vice versa.<br>
       <img width="584" height="114" alt="image" src="https://github.com/user-attachments/assets/9282ab3d-faef-49f8-8035-dfd365277a0a" /><br>
       <img width="594" height="118" alt="image" src="https://github.com/user-attachments/assets/5482a872-8d8e-463f-bdb4-70236c65c286" /><br>
 
-    + Wildcard mapping
+  + Wildcard mapping
 
       Create 2 new users on NFS client, without creating their home user: <br>
       ```
@@ -373,7 +376,7 @@ Run the following commands as root user.
       Give password to these users using ```passwd```
       
       Switch to these users from root, and create a test file.<br>
-      You will notice their /home/user1 and /home/user2 are automatically created as mountpoints
+      You will notice their ```/home/user1``` and ```/home/user2``` are automatically created as mountpoints. 
       
       ```
       su - user1
@@ -383,6 +386,13 @@ Run the following commands as root user.
       <img width="494" height="100" alt="image" src="https://github.com/user-attachments/assets/60bbf357-f175-4249-87bd-9072c52a4b14" /><br>
       <img width="686" height="130" alt="image" src="https://github.com/user-attachments/assets/8b170bfe-1eff-4eb9-9687-04981b0aca54" /><br>
 
+      **autofs** takes care of mounting the correct remote directories, using the username as the key. This is useful when centralized home directories is necessary to provide stricter control.<br>
+
+      We can verify **autofs** is at work by verifyign the current mount usage.<br>
+      ```
+      mount | grep autofs
+      ```
+     
       <img width="1292" height="206" alt="image" src="https://github.com/user-attachments/assets/e0a4b2ec-320a-4d4f-ae33-1620471ada4e" />
 
 
