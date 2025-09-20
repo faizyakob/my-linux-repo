@@ -1,4 +1,4 @@
-<img width="1264" height="268" alt="image" src="https://github.com/user-attachments/assets/e4a8504b-d044-4ca6-910c-dc21a8b22e72" />### Table of contents
+### Table of contents
 
 - [Introduction](#introduction)
 - [Concept](#concept)
