@@ -11,7 +11,7 @@
 
 In Linux, **autofs** is a service that automatically mounts and unmounts filesystems (like network shares, USB drives, or NFS exports) on demand.
 
-Instead of keeping a filesystem mounted all the time, autofs mounts it only when a user or process tries to access it, and automatically unmounts it after a period of inactivity. 
+Instead of keeping a filesystem mounted all the time, **autofs** mounts it only when a user or process tries to access it, and automatically unmounts it after a period of inactivity. 
 
 🔑 Key points about **autofs**:
 
