@@ -16,7 +16,7 @@ Instead of keeping a filesystem mounted all the time, **autofs** mounts it only 
 🔑 Key points about **autofs**:
 
 + It is controlled by the automount daemon.
-+ Uses configuration files like _/etc/auto.master_ and _/etc/auto.*_ to define mount points and rules.
++ Uses configuration files like ```/etc/auto.master``` and ```/etc/auto.*``` to define mount points and rules.
 + Saves system resources by not keeping unused mounts active.
 + Commonly used for NFS mounts in enterprise environments (e.g., home directories on a central server).
 
@@ -24,7 +24,7 @@ Instead of keeping a filesystem mounted all the time, **autofs** mounts it only 
 <details>
   <summary> Advantages</summary><br>
   
-✅ No manual entries required in _/etc/fstab_ – avoiding error-prone editing, simplifies configuration and reduces static mount dependencies.
+✅ No manual entries required in ```/etc/fstab``` – avoiding error-prone editing, simplifies configuration and reduces static mount dependencies.
 
 ✅ Wildcard mounting for multi-user environments – automatically mounts each user’s home directory from an NFS server, enabling centralized control and easy distribution of shared resources.
 
@@ -38,12 +38,12 @@ Instead of keeping a filesystem mounted all the time, **autofs** mounts it only 
 </details>
 
 👉 Example:
-If _/home/users_ is managed by **autofs**, the directory _/home/users/alice_ won’t be mounted until someone accesses it, and it will unmount automatically later if idle.
+If ```/home/users``` is managed by **autofs**, the directory ```/home/users/alice``` won’t be mounted until user alice accesses it, and it will unmount automatically later if idle.
 
 ### Concept
 
 When a user tries to access a local directory (aka mountpoint) in NFS client, **autofs** service will automatically mount the corresponding directory that is mapped on the NFS server for the user. 
-**autofs** utilizes few Systemd services for this: **mountd**, **nfs-server** and **rpcbind**. Therefore, these services and their ports need to be running and opened respectively on the NFS server.
+**autofs** utilizes few systemd services for this: **mountd**, **nfs-server** and **rpcbind**. Therefore, these services and their ports need to be running and opened respectively on the NFS server.
 
 <img width="1042" height="300" alt="image" src="https://github.com/user-attachments/assets/9400e4cf-3fa5-4729-88bb-f33731e08e41" />
 
@@ -67,7 +67,7 @@ As such, 🚩absolute paths MUST BE provided when using direct mapping.
 
 🔑 How direct mapping Works
 
-1. Uses _/etc/auto.master_ with the special entry ```/-```.
+1. Uses ```/etc/auto.master``` with the special entry ```/-```.
 2. Each entry in the corresponding map file points to an absolute path in the client filesystem.
 3. When a user or process accesses that exact path, **autofs** mounts the target automatically.
 
@@ -76,7 +76,7 @@ The specific local filesystem/mountpoint can sync only with the specific remote 
 
 <img width="1028" height="172" alt="image" src="https://github.com/user-attachments/assets/d28d7934-e7b9-4083-b783-ba6ebba72b32" />
 
-In above sceenshot example, remote directory ```/srv/nfs/direct``` will autmoatically get mounted when a client attemps to access local directory ```/mnt/direct```.
+In above sceenshot example, remote directory ```/srv/nfs/direct``` will automatically get mounted when a client attemps to access local directory ```/mnt/direct```.
 
 ⚠️ It is important to remember that the local mountpoint ```/mnt/direct``` must already existed before we can use direct mapping.
 
@@ -90,7 +90,7 @@ It is more common style (compared to direct mapping), and widely used in multi-u
 
 🔑 How indirect mapping Works
 
-1. You define a base mountpoint (a directory) in _/etc/auto.master_.
+1. You define a base mountpoint (a directory) in ```/etc/auto.master```.
 2. A separate map file contains relative keys that expand under that base mountpoint.
 3. When a user accesses one of those subdirectories, **autofs** mounts the corresponding remote filesystem.
 
@@ -117,9 +117,9 @@ In above screenshot example, remote directory ```/srv/nfs/indirect``` will autom
 
 🔑 How wildcard mapping works?
 
-1. Instead of defining each mount explicitly (e.g., alice, bob, charlie), you use the wildcard character *.
-2. The * matches any key requested under the base directory.
-3. The & symbol inside the NFS path expands to the same key name.
+1. Instead of defining each mount explicitly (e.g., alice, bob, charlie), you use the wildcard character ```*```.
+2. The ```*``` matches any key requested under the base directory.
+3. The ```&``` symbol inside the NFS path expands to the same key name.
 
 <img width="1034" height="172" alt="image" src="https://github.com/user-attachments/assets/02508959-2a2e-4127-8c7f-c12ecee8da22" />
 
@@ -149,10 +149,10 @@ Configurations are required on both VMs:
 <details>
   <summary> VM-2</summary><br>
   
-1. Install and enable the ```nfs-server``` package.
-     Ports used by nfs-server is 2049, while for rpcbind is 111.
-     Port for mountd varies, but usually it is 20048.
-     > In RHEL-based distro, nfs-server package also includes rpcbind and mountd. There is no need for separate packages install.
+1. Install and enable the **nfs-server** package.
+     Ports used by **nfs-server** is 2049, while for **rpcbind** is 111.
+     Port for **mountd** varies, but usually it is 20048.
+     > In RHEL-based distro, **nfs-server** package also includes **rpcbind** and **mountd**. There is no need for separate packages install.
 
      As root user, run:
 
@@ -401,7 +401,7 @@ Once we have configured **autofs** in previous section, let's try it.
 **autofs** is used for automating the mounting of filesystems. It is most useful in multi-user environment where there are many directories mounting tasks to handle, which becoming repetitive over time. It also provides some automation with wildcard mapping, when centralized home directories is necessary to provide stricter control.
 
 Tips:
-1. If you are unable to change directory into the mountpoints, check the directory permission on the NFS server.
+1. If you are unable to change directory into the mountpoints, check the directory permission on the NFS server. Specifically for wildcard mapping, ensure each user can access its ```/home/``` directory by matching the UID.
 2. If solely using NFSv4, both **mountd** and **nfs-server** services share port 2049, so there are only 2 ports to be whitelisted. 
 
 
