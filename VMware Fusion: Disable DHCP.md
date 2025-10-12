@@ -25,7 +25,11 @@ This is true for other applications that rely on having consistent IP address fo
 
 ### Pre-requisites
 
-Ensure you note the current IP address assignment. 
+Ensure you note: 
+  💡The current IP address & CIDR assignment. 
+  💡The current MAC address created for the VM
+
+Following command display both values.
 
 ```
 sudo ip address
@@ -45,7 +49,20 @@ Steps below outline how to edit built-in DHCP configuration:
 
 
 <details>
-  <summary>On MacOS:</summary><br>
+  <summary>On MacOS 💻:</summary><br>
+
+  1. Navigate to `/Library/Preferences/VMware Fusion/vmnet8/` and open the _dhcp.conf_ file.<br>
+     In this file, you can adjust settings such as IP ranges, lease times, and other DHCP-related configurations.
+     <br>
+     <img width="438" height="185" alt="image" src="https://github.com/user-attachments/assets/79c7f283-fa15-402c-9104-06ce555b67de" />
+     <br>
+
+  2. Edit the _dhcp.conf_ file.
+     ```
+     sudo vim /Library/Preferences/VMware\ Fusion/vmnet8/dhcpd.conf
+     ```
+     
+  4. 
   
 
 </details>
