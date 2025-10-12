@@ -29,8 +29,8 @@ Which method
 ### Pre-requisites
 
 Ensure you note: 
-  💡The current IP address & CIDR assignment. 
-  💡The current MAC address created for the VM
+  💡The current IP address & CIDR assignment. <br>
+  💡The current MAC address created for the VM. <br>
 
 Following command display both values.
 
@@ -46,10 +46,17 @@ Normally this will be eth0 or ens160 interface IP address.
 ### Method 1: Edit VMware DHCP configuration
 
 Each virtualization software has own method on how to configure their built-in DHCP configuration, which it uses to assign IP address to VM. 
-VMware by default does not expose this setting. 
+VMware by default does not expose this setting on its Fusion GUI. 
+
+The DHCP configurations are defined in _dhcp.conf_ file. 
+Depending on the VM's networking mode, this file exists in the following directory: 
+
+| NAT networking mode | File location | 
+|---|---|
+| Host-Only| `/Library/Preferences/VMware Fusion/vmnet1/` | 
+| NAT| `/Library/Preferences/VMware Fusion/vmnet8/` | 
 
 Steps below outline how to edit built-in DHCP configuration: 
-
 
 <details>
   <summary>On MacOS 💻:</summary><br>
@@ -59,6 +66,8 @@ Steps below outline how to edit built-in DHCP configuration:
      <br>
      <img width="438" height="185" alt="image" src="https://github.com/user-attachments/assets/79c7f283-fa15-402c-9104-06ce555b67de" />
      <br>
+
+     🚥 If this file does not exist, create it manually. 
 
   2. Edit the _dhcp.conf_ file.
      ```
