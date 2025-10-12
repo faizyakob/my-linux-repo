@@ -43,6 +43,15 @@ VMware by default does not expose this setting.
 
 Steps below outline how to edit built-in DHCP configuration: 
 
-On MacOS:
-On Windows: 
+
+<details>
+  <summary>On MacOS:</summary><br>
+  
+
+</details>
+<details>
+  <summary>On Windows:</summary><br>
+  
+
+</details>
 
