@@ -27,7 +27,9 @@ This is true for other applications that rely on having consistent IP address fo
 
 Ensure you note the current IP address assignment. 
 
-sudo ip address 
+```
+sudo ip address
+```
 
 ### Method 1: Edit VMware DHCP configuration
 
