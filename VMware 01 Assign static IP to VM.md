@@ -151,7 +151,7 @@ It uses the guest OS native network manager: Netplan in Ubuntu, or NetworkManage
 </details>
 
   1. Verify current IP address, CIDR and default route.
-     Also, check the connection's name. 
+     Also, check the connection's name, corresponding to the active interface. 
 
      ```
      sudo ip address
@@ -161,12 +161,41 @@ It uses the guest OS native network manager: Netplan in Ubuntu, or NetworkManage
 
      <img width="1028" height="400" alt="image" src="https://github.com/user-attachments/assets/ef0c1a7d-f510-404c-8324-a6bfb90bde16" />
 
+    
      
-  3. 
+  2. Edit the connection.
+     ```
+     nmcli con modify "ens160" \
+     ipv4.method manual \
+     ipv4.addresses 172.16.121.211/24 \
+     ipv4.gateway 172.16.121.2 \
+     ipv4.dns 8.8.8.8 \
+     ipv4.ignore-auto-dns yes \
+     ipv4.ignore-auto-routes yes \
+     connection.autoconnect yes
+     ```
+
+      🚥 Note:<br>
+         * Keep IP within VMware subnet (e.g. 172.16.121.x). Refer its _dhcp.conf_ file. <br>
+         * Ensure no other device is using same IP address. <br>
+         * You do not need to touch `/etc/sysconfig/network-scripts/*` manually; NetworkManager handles that.
+     
+  4. Restart the network connection
+     ```
+     sudo nmcli connection down "ens160" && sudo nmcli connection up "ens160"
+     ```
+
+     
+
+     
+
 
 ### Restart the VM
 
-Shut down and restart your VM. It should now receive the same IP every time from the VMware Fusion DHCP server.
+Shut down and restart your VM. 
+
++ If you are using method 1, VM should now receive the same IP every time from the VMware DHCP server.
++ If you are using method 2, VM bypass VMware's DHCP and use its static IP address configured via Netplan or NetworkManager. 
 
 ### Outro
 
