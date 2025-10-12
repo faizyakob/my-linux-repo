@@ -46,7 +46,8 @@ Normally this will be eth0 or ens160 interface IP address.
 <br>
 <br>
 
-### Method 1: Edit VMware DHCP configuration 🎃
+### Method 1: Edit VMware DHCP configuration 
+🎃
 
 Each virtualization software has own method on how to configure their built-in DHCP server configuration, which it uses to assign IP address to VM. 
 VMware by default does not expose this setting on its Fusion GUI. 
@@ -104,7 +105,44 @@ Steps below outline how to edit built-in DHCP configuration:
 
 </details>
 
-### Method 2: Configure static IP directly in VM 🔥
+### Method 2: Configure static IP directly in VM 
+🔥
+
+This method is recommended over changing VMware DHCP, as the configuration remains strictly in the VM itself. 
+It uses the guest OS native network manager: Netplan in Ubuntu, or NetworkManager in RHEL/Debian/CentOS. 
+
+<details>
+  <summary>For Ubuntu:</summary><br>
+
+  1. Find out the YAML file representing the active network interface. Refer "Pre-requisites" step above.
+  2. Edit the YAML file
+     ```
+     sudo vim /etc/netplan/50-cloud-init.yaml
+     ```
+     <img width="1574" height="514" alt="image" src="https://github.com/user-attachments/assets/6b5db7a3-1909-4e8a-8826-2dd19a9f382c" />
+
+     🚥 Note: You will notice the field "dhcp4" is set to **true**. This was done by VMware during creation of the VM. 
+     
+  4. Modify the YAML by setting "dhcp4" field to **no**, and add "addresses", "routes" and "nameservers". <br>
+     "addresses" is obtained from `sudo ip address`. <br>
+     "routes" is default route, and is obtained from `sudo ip route`. <br>
+     "nameservers" is any public DNS. Use Google or Cloudlfare as default.
+
+     <img width="1870" height="814" alt="image" src="https://github.com/user-attachments/assets/50757ad7-2e43-4243-a7e0-56b24fcd0b9c" />
+
+  5. Save and exit the file.
+  6. Apply the configuration.
+     ```
+     sudo netplan apply
+     ```
+     
+     The VM now will be using the IP address as static IP. 
+     
+
+</details>
+<details>
+  <summary>For RHEL/Debian/CentOS:</summary><br>
+</details>
 
 ### Restart VMware Fusion Networking
 
