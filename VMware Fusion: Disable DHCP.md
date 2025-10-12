@@ -42,3 +42,7 @@ Each virtualization software has own method on how to configure their built-in D
 VMware by default does not expose this setting. 
 
 Steps below outline how to edit built-in DHCP configuration: 
+
+On MacOS:
+On Windows: 
+
