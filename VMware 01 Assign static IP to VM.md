@@ -148,7 +148,7 @@ It uses the guest OS native network manager: Netplan in Ubuntu, or NetworkManage
 </details>
 <details>
   <summary>For RHEL/Debian/CentOS:</summary><br>
-</details>
+
 
   1. Verify current IP address, CIDR and default route.
      Also, check the connection's name, corresponding to the active interface. 
@@ -184,7 +184,7 @@ It uses the guest OS native network manager: Netplan in Ubuntu, or NetworkManage
      ```
      sudo nmcli connection down "ens160" && sudo nmcli connection up "ens160"
      ```
-
+</details>
      
 
      
