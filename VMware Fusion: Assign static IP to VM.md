@@ -21,10 +21,10 @@ This is true for other applications that rely on having consistent IP address fo
 
 To assign static IPs to VM, we can either:
 
-  🍭 Edit VMware DHCP configuration OR, <br>
-  🍭 Configure static IP directly in VM.
+  🍭 Method 1: Edit VMware DHCP configuration OR, <br>
+  🍭 Method 2: Configure static IP directly in VM.
 
-Which method 
+Method 2 is preferable, as it does not involve editing any VMware own configurations. It also means we bypass the VMware DHCP lease mechanism altogether. 
 
 ### Pre-requisites
 
@@ -56,25 +56,40 @@ Depending on the VM's networking mode, this file exists in the following directo
 | Host-Only| `/Library/Preferences/VMware Fusion/vmnet1/` | 
 | NAT| `/Library/Preferences/VMware Fusion/vmnet8/` | 
 
+  🚥 Note: This file already contains the pre-configured section of the built-in DHCP, which we should not modify.
+     Instead, take note at the "range" field which defines the CIDR of the IP address. 
+     <img width="353" height="71" alt="image" src="https://github.com/user-attachments/assets/a1f90869-d42a-4b2c-a5f8-a2820e17b567" />
+
+
+
+
 Steps below outline how to edit built-in DHCP configuration: 
 
 <details>
   <summary>On MacOS 💻:</summary><br>
 
-  1. Navigate to `/Library/Preferences/VMware Fusion/vmnet8/` and open the _dhcp.conf_ file.<br>
+  1. Navigate to `/Library/Preferences/VMware Fusion/vmnet{1,8}/` and open the _dhcp.conf_ file.<br>
      In this file, you can adjust settings such as IP ranges, lease times, and other DHCP-related configurations.
      <br>
      <img width="438" height="185" alt="image" src="https://github.com/user-attachments/assets/79c7f283-fa15-402c-9104-06ce555b67de" />
      <br>
-
-     🚥 If this file does not exist, create it manually. 
 
   2. Edit the _dhcp.conf_ file.
      ```
      sudo vim /Library/Preferences/VMware\ Fusion/vmnet8/dhcpd.conf
      ```
      
-  4. 
+  3. Add the following block to the bottom of the file.
+
+     It's easier 
+     ```
+     host myvm {
+      hardware ethernet 00:0c:29:1d:26:15;  # Replace with your VM's MAC
+      fixed-address 172.16.121.208;         # Replace with desired IP in subnet
+      }
+     ```
+     
+  5. 
   
 
 </details>
