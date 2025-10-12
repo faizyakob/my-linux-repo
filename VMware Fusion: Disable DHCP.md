@@ -30,6 +30,11 @@ Ensure you note the current IP address assignment.
 ```
 sudo ip address
 ```
+Normally this will be eth0 or ens160 interface IP address. 
+
+<img width="923" height="264" alt="image" src="https://github.com/user-attachments/assets/644e2de8-5605-49fe-8509-e5533824a53a" />
+<br>
+<br>
 
 ### Method 1: Edit VMware DHCP configuration
 
