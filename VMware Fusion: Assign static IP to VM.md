@@ -48,7 +48,7 @@ Normally this will be eth0 or ens160 interface IP address.
 
 ### Method 1: Edit VMware DHCP configuration
 
-Each virtualization software has own method on how to configure their built-in DHCP configuration, which it uses to assign IP address to VM. 
+Each virtualization software has own method on how to configure their built-in DHCP server configuration, which it uses to assign IP address to VM. 
 VMware by default does not expose this setting on its Fusion GUI. 
 
 The DHCP configurations are defined in _dhcp.conf_ file. 
@@ -59,12 +59,13 @@ Depending on the VM's networking mode, this file exists in the following directo
 | Host-Only| `/Library/Preferences/VMware Fusion/vmnet1/` | 
 | NAT| `/Library/Preferences/VMware Fusion/vmnet8/` | 
 
-  🚥 Note: This file already contains the pre-configured section of the built-in DHCP, which we should not modify.
+  🚥 Note: This file already contains the pre-configured section of the built-in DHCP server, which we should not modify.
      Instead, take note at the "range" field which defines the CIDR of the IP address. The current VM IP address was picked from this range. <br>
 
      
   <img width="353" height="71" alt="image" src="https://github.com/user-attachments/assets/a1f90869-d42a-4b2c-a5f8-a2820e17b567" />
 <br>
+
 
 Steps below outline how to edit built-in DHCP configuration: 
 
@@ -103,13 +104,25 @@ Steps below outline how to edit built-in DHCP configuration:
 
 </details>
 
+### Method 2: Configure static IP directly in VM
+
 ### Restart VMware Fusion Networking
 
+This step is required for the new configuration to take effects. 
+
+```
+sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
+sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
+```
 
 ### Restart the VM
 
-
+Shut down and restart your VM. It should now receive the same IP every time from the VMware Fusion DHCP server.
 
 ### Outro
 
+The VM should now have the consistent IP address each time it restarts, or shuts down and turn back on. 
+
 ### Tips
+
+- The above work arounds should work when SSID of the network is changed. 
