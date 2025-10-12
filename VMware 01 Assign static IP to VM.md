@@ -11,7 +11,7 @@
 ### Introduction
 
 Some applications running on your VM will require the VM to maintain using same IPs, otherwise it can messed up its configurations, causing them to cease working.
-This is true fif you run Kubernetes cluster on your VM, especially. 
+This is true if you run Kubernetes cluster on your VM, especially. 
 VMware uses DHCP by default, and it does not expose interface to modify its configuration. 
 
 Using static IP for a VM is desirable, as it prevents various kind of issues. For Kubernetes especially, the kube-apiserver IP address is selected using the current IP address of the main NIC interface (normally ens160 or eth0). During kubeadm initilization, this particular IP address is used in generating the certificates for the Kubernetes core components. 
