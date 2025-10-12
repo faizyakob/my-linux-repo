@@ -4,6 +4,7 @@
 - [Pre-requisites](#pre-requisites)
 - [Method 1: Edit VMware DHCP configuration](#method-1-edit-vmware-dhcp-configuration)
 - [Method 2: Configure static IP directly in VM](#method-2-configure-static-ip-directly-in-vm)
+- [Restart VMware Fusion Networking](#restart-vmware-fusion-networking)
 - [Restart the VM](#restart-the-vm)
 - [Outro](#outro)
 - [Tips](#tips)
@@ -18,6 +19,8 @@ Using static IP for a VM is desirable, as it prevents various kind of issues. Fo
 
 If this IP changes, Kubernetes will stop working as the Kubernetes components will unable to talk to kube-apiserver, who is still listening on the previous IP address which is no longer exists. 
 This is true for other applications that rely on having consistent IP address for listening.  
+
+In this article, we explore how to make an IP address static for a VM. 
 
 To assign static IPs to VM, we can either:
 
@@ -57,9 +60,9 @@ Depending on the VM's networking mode, this file exists in the following directo
 | NAT| `/Library/Preferences/VMware Fusion/vmnet8/` | 
 
   🚥 Note: This file already contains the pre-configured section of the built-in DHCP, which we should not modify.
-     Instead, take note at the "range" field which defines the CIDR of the IP address. 
+     Instead, take note at the "range" field which defines the CIDR of the IP address. <br>
+     The current VM IP address was picked from this range. 
      <img width="353" height="71" alt="image" src="https://github.com/user-attachments/assets/a1f90869-d42a-4b2c-a5f8-a2820e17b567" />
-
 
 
 
@@ -81,16 +84,17 @@ Steps below outline how to edit built-in DHCP configuration:
      
   3. Add the following block to the bottom of the file.
 
-     It's easier 
+     🚥 Note: It's easier to just turn the current IP address static, but if required, we can use a new IP address within the range.
+     
      ```
      host myvm {
       hardware ethernet 00:0c:29:1d:26:15;  # Replace with your VM's MAC
-      fixed-address 172.16.121.208;         # Replace with desired IP in subnet
+      fixed-address 172.16.121.208;         # Replace with current IP in subnet, or a new desired IP address. 
       }
      ```
-     
-  5. 
-  
+     <br>
+     After editing, save the file.
+     <br>
 
 </details>
 <details>
@@ -99,3 +103,13 @@ Steps below outline how to edit built-in DHCP configuration:
 
 </details>
 
+### Restart VMware Fusion Networking
+
+
+### Restart the VM
+
+
+
+### Outro
+
+### Tips
