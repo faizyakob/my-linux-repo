@@ -4,7 +4,6 @@
 - [Pre-requisites](#pre-requisites)
 - [Method 1: Edit VMware DHCP configuration](#method-1-edit-vmware-dhcp-configuration)
 - [Method 2: Configure static IP directly in VM](#method-2-configure-static-ip-directly-in-vm)
-- [Restart VMware Fusion Networking](#restart-vmware-fusion-networking)
 - [Restart the VM](#restart-the-vm)
 - [Outro](#outro)
 - [Tips](#tips)
@@ -65,8 +64,7 @@ Depending on the VM's networking mode, this file exists in the following directo
 
      
   <img width="353" height="71" alt="image" src="https://github.com/user-attachments/assets/a1f90869-d42a-4b2c-a5f8-a2820e17b567" />
-<br>
-
+  <br>
 
 Steps below outline how to edit built-in DHCP configuration: 
 
@@ -75,16 +73,17 @@ Steps below outline how to edit built-in DHCP configuration:
 
   1. Navigate to `/Library/Preferences/VMware Fusion/vmnet{1,8}/` and open the _dhcp.conf_ file.<br>
      In this file, you can adjust settings such as IP ranges, lease times, and other DHCP-related configurations.
-     <br>
+
+
      <img width="438" height="185" alt="image" src="https://github.com/user-attachments/assets/79c7f283-fa15-402c-9104-06ce555b67de" />
      <br>
 
-  2. Edit the _dhcp.conf_ file.
+  1. Edit the _dhcp.conf_ file.
      ```
      sudo vim /Library/Preferences/VMware\ Fusion/vmnet8/dhcpd.conf
      ```
      
-  3. Add the following block to the bottom of the file.
+  2. Add the following block to the bottom of the file.
 
      🚥 Note: It's easier to just turn the current IP address static, but if required, we can use a new IP address within the range.
      
@@ -96,7 +95,14 @@ Steps below outline how to edit built-in DHCP configuration:
      ```
      <br>
      After editing, save the file.
-     <br>
+
+  3. Restart VMware Fusion networking.
+     This step is required for the new configuration to take effects. 
+
+     ```
+     sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
+     sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
+     ```
 
 </details>
 <details>
@@ -144,14 +150,19 @@ It uses the guest OS native network manager: Netplan in Ubuntu, or NetworkManage
   <summary>For RHEL/Debian/CentOS:</summary><br>
 </details>
 
-### Restart VMware Fusion Networking
+  1. Verify current IP address, CIDR and default route.
+     Also, check the connection's name. 
 
-This step is required for the new configuration to take effects. 
+     ```
+     sudo ip address
+     sudo ip route
+     sudo nmcli device status
+     ```
 
-```
-sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
-sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
-```
+     <img width="1028" height="400" alt="image" src="https://github.com/user-attachments/assets/ef0c1a7d-f510-404c-8324-a6bfb90bde16" />
+
+     
+  3. 
 
 ### Restart the VM
 
