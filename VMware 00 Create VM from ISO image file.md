@@ -82,7 +82,7 @@ Steps:
 
 ### Tips
 
-* VMware Fusion will automatically assign an IP adress using DHCP for each VM. The IP address pool depends on the ISP. Most of the time, IP adress will stick. If it does not, we will need further configuration to make the assigned IP static. (See [Assign static IP to VM](VMware%3A%2001%20Assign%20static%20IP%20to%20VM.md)
+* VMware Fusion will automatically assign an IP adress using DHCP for each VM. The IP address pool depends on the ISP. Most of the time, IP adress will stick. If it does not, we will need further configuration to make the assigned IP static. (See [Assign static IP to VM](VMware%20-%2001%20Assign%20static%20IP%20to%20VM.md).
 * For copy and paste from host machine to guess VM, install Open VM tools. Using root user:
   
   `apt-get -y upgrade && apt-get -y update`
