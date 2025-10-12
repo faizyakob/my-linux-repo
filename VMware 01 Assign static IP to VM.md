@@ -49,7 +49,7 @@ Normally this will be eth0 or ens160 interface IP address.
 🎃
 
 Each virtualization software has own method on how to configure their built-in DHCP server configuration, which it uses to assign IP address to VM. 
-VMware by default does not expose this setting on its Fusion GUI. 
+VMware by default does not expose this setting on its Fusion or Workstation GUI. 
 
 The DHCP configurations are defined in _dhcp.conf_ file. 
 Depending on the VM's networking mode, this file exists in the following directory: 
