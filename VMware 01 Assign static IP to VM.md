@@ -46,7 +46,7 @@ Normally this will be eth0 or ens160 interface IP address.
 <br>
 <br>
 
-🔥 ### Method 1: Edit VMware DHCP configuration
+### Method 1: Edit VMware DHCP configuration 🎃
 
 Each virtualization software has own method on how to configure their built-in DHCP server configuration, which it uses to assign IP address to VM. 
 VMware by default does not expose this setting on its Fusion GUI. 
@@ -104,7 +104,7 @@ Steps below outline how to edit built-in DHCP configuration:
 
 </details>
 
-🔥 ### Method 2: Configure static IP directly in VM
+### Method 2: Configure static IP directly in VM 🔥
 
 ### Restart VMware Fusion Networking
 
