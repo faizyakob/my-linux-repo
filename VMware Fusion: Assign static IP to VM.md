@@ -60,11 +60,11 @@ Depending on the VM's networking mode, this file exists in the following directo
 | NAT| `/Library/Preferences/VMware Fusion/vmnet8/` | 
 
   🚥 Note: This file already contains the pre-configured section of the built-in DHCP, which we should not modify.
-     Instead, take note at the "range" field which defines the CIDR of the IP address. <br>
-     The current VM IP address was picked from this range. 
-     <img width="353" height="71" alt="image" src="https://github.com/user-attachments/assets/a1f90869-d42a-4b2c-a5f8-a2820e17b567" />
+     Instead, take note at the "range" field which defines the CIDR of the IP address. The current VM IP address was picked from this range. <br>
 
-
+     
+  <img width="353" height="71" alt="image" src="https://github.com/user-attachments/assets/a1f90869-d42a-4b2c-a5f8-a2820e17b567" />
+<br>
 
 Steps below outline how to edit built-in DHCP configuration: 
 
