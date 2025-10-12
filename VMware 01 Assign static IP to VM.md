@@ -30,7 +30,7 @@ Method 2 is preferable, as it does not involve editing any VMware own configurat
 
 ### Pre-requisites
 
-Ensure you note: 
+Ensure you note: <br>
   💡The current IP address & CIDR assignment. <br>
   💡The current MAC address created for the VM. <br>
 
