@@ -1,6 +1,7 @@
 ### Table of contents
 
 - [Introduction](#introduction)
+- [Pre-requisites](#pre-requisites)
 - [Method 1: Edit VMware DHCP configuration](#method-1-edit-vmware-dhcp-configuration)
 - [Method 2: Configure static IP directly in VM](#method-2-configure-static-ip-directly-in-vm)
 - [Restart the VM](#restart-the-vm)
@@ -22,9 +23,15 @@ Using static IP for a VM is desirable, as it prevents various kind of issues. Fo
 If this IP changes, Kubernetes will stop working as the Kubernetes components will unable to talk to kube-apiserver, who is still listening on the previous IP address which is no longer exists. 
 This is true for other applications that rely on having consistent IP address for listening.  
 
+### Pre-requisites
+
+Ensure you note the current IP address assignment. 
+
+sudo ip address 
+
 ### Method 1: Edit VMware DHCP configuration
 
-Each virtualization software has own method on how to configure their built-in DHCP server. 
+Each virtualization software has own method on how to configure their built-in DHCP configuration, which it uses to assign IP address to VM. 
 VMware by default does not expose this setting. 
 
-Steps below outline 
+Steps below outline how to edit built-in DHCP configuration: 
