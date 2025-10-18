@@ -1,24 +1,34 @@
 
-### Table of contents
+## Table of contents
 
 - [Introduction](#introduction)
-- [Concept](#concept)
-- [Types of mapping in autofs](#types-of-mapping-in-autofs)
-- [Configuring autofs service](#configuring-autofs-service)
-- [Test autofs service](#test-autofs-service)
-- [Tips and outro](#tips-and-outro)
+- [Steps to use ISO as repositories](#steps-to-use-iso-as-repositories)
 
-### Introduction
+## Introduction
 
 In this article, we walkthrough how to mount an ISO file as a repository. <br>
 Normally, depending on the distros, we will register the VM with the respective subscription management service. When a VM is registered, a repository file is created automatically that will point to available online repositories, which then allow users to download and install package via the native package manager like `apt` or `dnf`.
 
 For Red Hat Linux, we use `subscription-manager` tool to register the VM.
 
-As root user, run `subscription-manager status` to check if VM is registered. 
+As root user, run `subscription-manager status` to check if VM is registered. <br>
+
 <img width="5100" height="450" alt="image" src="https://github.com/user-attachments/assets/bd6c3cc2-4f85-4b29-a2b5-648ebfc3af36" />
 
 
+However, there are cicumstances where we do not want to connect VM with online repositories, but still want to download and install packages. 
+In this case, we can use the VM's ISO image and mount it to a directory. The ISO image file already contains a huge number of packages, which will serve as local repostiories nicely. 
 
-However, there are cicumstances 
+## Steps to use ISO as repositories
+
+As root user, follow below steps.
+
+### Step 1: Enable the ISO
+
+1. Use the virtualization software to "insert" the ISO file.
+   
+   > Note: This depends on each virtualization software. Most software has a "CD" 📀 menu which represents optical drive for this purpose. 
+2. Use lsblk
+
+
 
