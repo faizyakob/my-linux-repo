@@ -28,12 +28,25 @@ As root user, follow below steps.
 
 <details>
   <summary>Step 1: Enable the ISO</summary><br>
-
-1. Use the virtualization software to "insert" the ISO image file.
+   1. Use the virtualization software to "insert" the ISO image file.
    
-   > Note: This depends on each virtualization software. Most software has a "CD" 📀 menu which represents optical drive for this purpose. 
-2. Use `lsblk` to verify 
+   > Note: This depends on each virtualization software. Most software has a "CD" 📀 menu which represents optical drive for this purpose.
+   
+   2. Use `lsblk` to verify ISO image file has been inserted.
+
+   Commonly either `sr0` or `sr1` will be used.
+   Check the size. It should be same size as ISO image file.
+   
+   <img width="880" height="173" alt="image" src="https://github.com/user-attachments/assets/02ad17ce-fe34-4cf9-97a1-902309e2eff8" />
 
 </details>
 
+<details>
+  <summary>Step 2: Create mount directory</summary><br>
 
+1. Create a directory to serve as mountpoint.
+  ```
+   mkdir -p /repo
+  ```
+
+</details>
