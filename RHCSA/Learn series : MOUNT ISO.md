@@ -16,8 +16,10 @@ As root user, run `subscription-manager status` to check if VM is registered. <b
 <img width="5100" height="450" alt="image" src="https://github.com/user-attachments/assets/bd6c3cc2-4f85-4b29-a2b5-648ebfc3af36" />
 
 
-However, there are cicumstances where we do not want to connect VM with online repositories, but still want to download and install packages. 
-In this case, we can use the VM's ISO image and mount it to a directory. The ISO image file already contains a huge number of packages, which will serve as local repostiories nicely. 
+However, there are cicumstances where we do not want to connect VM with online repositories, but still want to download and install packages. <br>
+
+In this case, we can use the VM's ISO image and mount it to a directory. The ISO image file already contains a huge number of packages, which will serve as local repostiories nicely. <br>
+
 (Ref: /<vmware 00 create VM from ISO image file>)
 
 ## Steps to use ISO as repositories
