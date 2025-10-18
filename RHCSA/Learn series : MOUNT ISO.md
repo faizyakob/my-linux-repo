@@ -20,7 +20,6 @@ However, there are cicumstances where we do not want to connect VM with online r
 
 In this case, we can use the VM's ISO image and mount it to a directory. The ISO image file already contains a huge number of packages, which will serve as local repostiories nicely. <br>
 
-(Ref: /<vmware 00 create VM from ISO image file>)
 (Ref: [VMware 00 Create VM from ISO image file](<VMware 00 Create VM from ISO image file.md>) 
 
 ## Steps to use ISO as repositories
