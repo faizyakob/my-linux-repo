@@ -18,6 +18,7 @@ As root user, run `subscription-manager status` to check if VM is registered. <b
 
 However, there are cicumstances where we do not want to connect VM with online repositories, but still want to download and install packages. 
 In this case, we can use the VM's ISO image and mount it to a directory. The ISO image file already contains a huge number of packages, which will serve as local repostiories nicely. 
+(Ref: /<vmware 00 create VM from ISO image file>)
 
 ## Steps to use ISO as repositories
 
@@ -26,10 +27,10 @@ As root user, follow below steps.
 <details>
   <summary>Step 1: Enable the ISO</summary><br>
 
-1. Use the virtualization software to "insert" the ISO file.
+1. Use the virtualization software to "insert" the ISO image file.
    
    > Note: This depends on each virtualization software. Most software has a "CD" 📀 menu which represents optical drive for this purpose. 
-2. Use lsblk
+2. Use `lsblk` to verify 
 
 </details>
 
