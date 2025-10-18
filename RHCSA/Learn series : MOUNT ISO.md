@@ -23,12 +23,14 @@ In this case, we can use the VM's ISO image and mount it to a directory. The ISO
 
 As root user, follow below steps.
 
-### Step 1: Enable the ISO
+<details>
+  <summary>Step 1: Enable the ISO</summary><br>
 
 1. Use the virtualization software to "insert" the ISO file.
    
    > Note: This depends on each virtualization software. Most software has a "CD" 📀 menu which represents optical drive for this purpose. 
 2. Use lsblk
 
+</details>
 
 
