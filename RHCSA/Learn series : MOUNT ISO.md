@@ -16,7 +16,7 @@ Normally, depending on the distros, we will register the VM with the respective 
 For Red Hat Linux, we use `subscription-manager` tool to register the VM.
 
 As root user, run `subscription-manager status` to check if VM is registered. 
-<img width="9100" height="650" alt="image" src="https://github.com/user-attachments/assets/bd6c3cc2-4f85-4b29-a2b5-648ebfc3af36" />
+<img width="5100" height="250" alt="image" src="https://github.com/user-attachments/assets/bd6c3cc2-4f85-4b29-a2b5-648ebfc3af36" />
 
 
 
