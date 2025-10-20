@@ -122,6 +122,6 @@ dnf install -y nmap
 As we are using local repositories, Red Hat will keep displaying the message to encourage registering the VM to entitlement server. 
 This is expected and can safely be ignored. 
 
-Note that the limitation of using local repositories is that it's limited to packages available in the ISO image file. If it does not contain pacakges that we want, we still need to use online repositories for that. 
+Note that the limitation of using local repositories is that it's limited to packages available in the ISO image file. If it does not contain packages that we want, we still need to use online repositories for that. 
 
 
