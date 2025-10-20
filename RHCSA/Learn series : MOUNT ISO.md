@@ -3,6 +3,7 @@
 
 - [Introduction](#introduction)
 - [Steps to use ISO as repositories](#steps-to-use-iso-as-repositories)
+- [Outro](#outro)
 
 ## Introduction
 
@@ -14,7 +15,6 @@ For Red Hat Linux, we use `subscription-manager` tool to register the VM.
 As root user, run `subscription-manager status` to check if VM is registered. <br>
 
 <img width="5100" height="450" alt="image" src="https://github.com/user-attachments/assets/bd6c3cc2-4f85-4b29-a2b5-648ebfc3af36" />
-
 
 However, there are cicumstances where we do not want to connect VM with online repositories, but still want to download and install packages. <br>
 
@@ -95,9 +95,33 @@ As root user, follow below steps.
 
 </details>
 <details>
-  <summary>Step 5: Enable the repositories </summary><br>
+  <summary>Step 5: Disable GPG check on repositories </summary><br>
 
-  The created local repositories are not enabled by default. 
+  The created local repositories are enabled by default. However they will fail to function as necessary certificates are not configured. We can ignore this requirement as the repositories are local.<br>
   
+  Navigate to /etc/yum.repos.d/ to view the repo metadata file that are created for each.<br>
+  
+  Use `vim` to edit the files and add `gpgcheck=0` for each. <br>
+
+  <img width="603" height="108" alt="image" src="https://github.com/user-attachments/assets/c256847a-fe0a-4396-8da8-80719ed91869" />
+
 
 </details>
+
+The repositories should be usable now. Try installing an application (example: Nmap), and `dnf` now will pull necessary packages from the local repositories and install them. 
+
+```
+dnf install -y nmap
+```
+
+<img width="1273" height="344" alt="image" src="https://github.com/user-attachments/assets/352c994f-73b5-46a3-8b26-4174faf84757" />
+
+
+## Outro
+
+As we are using local repositories, Red Hat will keep displaying the message to encourage registering the VM to entitlement server. 
+This is expected and can safely be ignored. 
+
+Note that the limitation of using local repositories is that it's limited to packages available in the ISO image file. If it does not contain pacakges that we want, we still need to use online repositories for that. 
+
+
