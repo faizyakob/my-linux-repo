@@ -22,6 +22,8 @@ In this case, we can use the VM's ISO image and mount it to a directory. The ISO
 
 (Ref: [VMware 00 Create VM from ISO image file ](<../VMware 00 Create VM from ISO image file.md>)) 
 
+> Note: We use Red Hat as example for this article.
+
 ## Steps to use ISO as repositories
 
 As root user, follow below steps.
@@ -34,7 +36,7 @@ As root user, follow below steps.
    
    2. Use `lsblk` to verify ISO image file has been inserted.
 
-   Commonly either `sr0` or `sr1` will be used.
+   Commonly either `sr0` or `sr1` will be used for representing ISO file (as block device) mounted using optical drive.
    Check the size. It should be same size as ISO image file.
    
    <img width="880" height="173" alt="image" src="https://github.com/user-attachments/assets/02ad17ce-fe34-4cf9-97a1-902309e2eff8" />
@@ -44,9 +46,58 @@ As root user, follow below steps.
 <details>
   <summary>Step 2: Create mount directory</summary><br>
 
-1. Create a directory to serve as mountpoint.
+  Create a directory to serve as mountpoint.
   ```
    mkdir -p /repo
   ```
+
+</details>
+<details>
+  <summary>Step 3: Copy ISO block device to a file and mount it</summary><br>
+
+  1. Use `dd` utility to copy the ISO block device as a file.
+     
+    ```
+     dd if=/dev/sr0 of=/rhel9.iso bs=1M
+    ```
+    <img width="635" height="94" alt="image" src="https://github.com/user-attachments/assets/00147173-1b49-4324-a215-559a40731c60" />
+
+  2. Edit _/etc/fstab_ and mount the file onto directory created in Step 2. Use `iso9660` as filesystem type.
+     
+     <img width="946" height="166" alt="image" src="https://github.com/user-attachments/assets/f89da8d1-998c-4b6a-8b63-bacad6fa19cf" />
+
+  3. Reload _/etc/fstab_ file to ensure no mounting error.
+
+     ```
+     systemctl daemon-reload
+     mount -a
+     findmnt --verify
+     ```
+
+     Once mounted, there should be 2 folders when we view the mounted directory: **BaseOS** and **AppStream**.
+     These folders contain the necessary packages to serve as local repositories. 
+
+     <img width="702" height="264" alt="image" src="https://github.com/user-attachments/assets/04fb5b19-be48-4f82-a9fb-f97f0cd01c2b" />
+
+
+</details>
+<details>
+  <summary>Step 4: Use package manager to create local repositories </summary><br>
+
+  Create local repositories by running: 
+
+  ```
+  dnf config-manager --add-repo=file:///repo/BaseOS
+  dnf config-manager --add-repo=file:///repo/AppStream
+  ```
+
+  <img width="1156" height="330" alt="image" src="https://github.com/user-attachments/assets/6c79e601-1bfa-47ce-8d92-5902db21a797" />
+
+</details>
+<details>
+  <summary>Step 5: Enable the repositories </summary><br>
+
+  The created local repositories are not enabled by default. 
+  
 
 </details>
