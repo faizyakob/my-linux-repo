@@ -37,6 +37,7 @@ SSH is not tested in details for both RHCSA and LFCS exams, but it is essential 
 
 ## View SSHD service status
 
+For some distros, SSH is already installed by default when the OS is installed. To check if SSH is isntalled and enabled, run following commands:
 
 <details>
 
