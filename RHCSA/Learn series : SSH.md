@@ -37,7 +37,7 @@ SSH is not tested in details for both RHCSA and LFCS exams, but it is essential 
 
 ## View SSHD service status
 
-For some distros, SSH is already installed by default when the OS is installed. To check if SSH is isntalled and enabled, run following commands:
+For some distros, SSH is already installed by default when the OS is installed. To check if SSH is installed and enabled, run following commands:
 
 <details>
 <summary>Check if SSHD is running</summary><br>
@@ -50,6 +50,9 @@ sudo systemctl status sshd
 <img width="842" height="210" alt="image" src="https://github.com/user-attachments/assets/67d12953-b565-4c7b-8973-120fc7c52d67" />
 
 If the status is not **active (running)**, enable & start the SSHD daemon.
+
+If the output is "_Unit sshd.service could not be found._", then SSH package is not installed. Refer how to install in "Introduction" section above, then enable & start the SSH daemon.
+
 </details>
 
 <details>
@@ -67,10 +70,8 @@ Check again the status to ensure it is now running.
 
 
 
-## Modify SSHD parameters
-
 ## View SSHD configuration files
-
+## Modify SSHD parameters
 ## Outro
 
 As we are using local repositories, Red Hat will keep displaying the message to encourage registering the VM to entitlement server. 
