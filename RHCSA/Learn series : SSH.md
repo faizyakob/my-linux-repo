@@ -40,16 +40,31 @@ SSH is not tested in details for both RHCSA and LFCS exams, but it is essential 
 For some distros, SSH is already installed by default when the OS is installed. To check if SSH is isntalled and enabled, run following commands:
 
 <details>
+<summary>Check if SSHD is running</summary><br>
+  
+The SSHD daemon must be running to provide SSH service.<br>
+  
+```
+sudo systemctl status sshd
+```
+<img width="842" height="210" alt="image" src="https://github.com/user-attachments/assets/67d12953-b565-4c7b-8973-120fc7c52d67" />
 
-Insert details here.
+If the status is not **active (running)**, enable & start the SSHD daemon.
+</details>
+
+<details>
+<summary>Enable & start SSHD daemon</summary><br>
+  
+```
+sudo systemctl enable sshd
+sudo systemctl start sshd
+```
+
+Check again the status to ensure it is now running.
 
 </details>
 
 
-
-```
-dnf install -y nmap
-```
 
 
 ## Modify SSHD parameters
