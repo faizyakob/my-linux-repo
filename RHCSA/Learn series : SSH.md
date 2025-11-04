@@ -71,6 +71,14 @@ Check again the status to ensure it is now running.
 
 
 ## View SSHD configuration files
+
+SSH makes use of many configuration files, depending on its usage context: <br>
+
+  🖥️ Server-side (SSH Daemon) files <br>
+  💻 Client-side (User SSH configuration and cache) <br>
+  🔑 Authentication-related files (on both ends) <br>
+  🧰 Supporting files <br>
+
 ## Modify SSHD parameters
 ## Outro
 
