@@ -13,8 +13,8 @@
 In this article, we discuss on high level what SSH is. Objective is not to know the nitty-gritty details, but enough to sufficiently provide overwiew of SSH.<br>
 SSH is not tested in details for both RHCSA and LFCS exams, but it is essential tools for lots of troubleshooting scenarios. An engineer have to at the very least, know how to operate SSH, and figure out what could be the issue if SSH is somehow not working. <br>
 
-+ SSH is a protocol used to access a server from a client. It uses TCP and port `22` by default.
-  When talking about SSH, we always use client-server model, where source machine is a client, where destination machine is a server.
++ SSH is a protocol used to access a server from a client. It uses TCP and port `22` by default.<br>
+  When talking about SSH, we always use client-server model, where source machine is a client, and destination machine is a server.
 
   <img width="723" height="251" alt="image" src="https://github.com/user-attachments/assets/42ee3430-b4bc-476e-8562-cf218e842668" />
 
