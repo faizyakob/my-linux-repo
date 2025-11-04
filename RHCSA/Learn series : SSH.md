@@ -13,7 +13,10 @@
 In this article, we discuss on high level what SSH is. Objective is not to know the nitty-gritty details, but enough to sufficiently provide overwiew of SSH.<br>
 SSH is not tested in details for both RHCSA and LFCS exams, but it is essential tools for lots of troubleshooting scenarios. An engineer have to at the very least, know how to operate SSH, and figure out what could be the issue if SSH is somehow not working. <br>
 
-+ SSH is a protocol used to access a server from a client. It uses port `22` by default.
++ SSH is a protocol used to access a server from a client. It uses TCP and port `22` by default.
+
+  <img width="723" height="251" alt="image" src="https://github.com/user-attachments/assets/42ee3430-b4bc-476e-8562-cf218e842668" />
+
 
 + In Linux, SSH is implemented using the OpenSSH suite, which provides both the client (to connect to other machines) and the server (to accept SSH connections).
 
@@ -78,6 +81,10 @@ SSH makes use of many configuration files, depending on its usage context: <br>
   💻 Client-side (User SSH configuration and cache) <br>
   🔑 Authentication-related files (on both ends) <br>
   🧰 Supporting files <br>
+
+  ### Server-side (SSH Daemon) files
+
+  
 
 ## Modify SSHD parameters
 ## Outro
