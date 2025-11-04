@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [View SSHD service status](#view-sshd-service-status)
 - [View SSHD configuration files](#view-sshd-configuration-files)
+- [Connecting using SSH](#connecting-using-ssh)
 - [Modify SSHD parameters](#modify-sshd-parameters)
 - [Outro](#outro)
 
@@ -123,6 +124,14 @@ Without modifying the default values in this file, SSH should already been worki
   | `/etc/pam.d/sshd`| PAM (Pluggable Authentication Module) config for SSH login policies. |
 
   `/etc/pam.d/sshd` is used in more advance scenario, for example security-related. 
+
+## Connecting using SSH
+
+Connecting using SSH is simple. 
+
+The syntax is `ssh <user-name>@<ip-address/hostname> -p <port-number>`. <br>
+
+_<port-number>_ and _<user-name>_ can be omitted, in which it will default to port 22 and current user triggering the command.
 
 ## Modify SSHD parameters
 
