@@ -288,7 +288,7 @@ Run the following commands as root user.
      ```
      
 5.  Edit **autofs** configuration files.
-     This is the most immportant step, as it defines how the mapping will happen.
+     This is the most important step, as it defines how the mapping will happen.
 
      + #### /etc/auto.master<br>
        The main **autofs** configuration file. It's the entry point where type of mapping is defined.
