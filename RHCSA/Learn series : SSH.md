@@ -84,7 +84,14 @@ SSH makes use of many configuration files, depending on its usage context: <br>
 
   ### Server-side (SSH Daemon) files
 
-  
+  | File | Usage | 
+  |------|-------|
+  | `/etc/ssh/sshd_config`| Global config for the SSH **server daemon**. Controls authentication methods, allowed users, port, etc. | 
+  |`/etc/ssh/ssh_host_*_key` and `/etc/ssh/ssh_host_*_key.pub`|Server’s **private and public host keys**. Used to identify the server to clients (e.g. ssh_host_rsa_key, ssh_host_ecdsa_key).|
+  | `/etc/nologin` (optional)| If present, prevents non-root logins (useful for maintenance). | 
+  |`/var/log/auth.log` or `/var/log/secure`|Where SSH authentication events are logged (depends on distro).|
+
+  `/etc/ssh/sshd_config` is the most common file that is modified, as it affects behavior when client is connecting to this host. Some of important parameters are _PermitRootLogin_, _Port_, _PasswordAuthentication_ and _PubkeyAuthentication_. In [Modify SSHD parameters](#modify-sshd-parameters), we demonstrate on how to modify some of these parameters.
 
 ## Modify SSHD parameters
 ## Outro
