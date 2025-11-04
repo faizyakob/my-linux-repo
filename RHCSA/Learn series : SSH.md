@@ -126,8 +126,35 @@ Without modifying the default values in this file, SSH should already been worki
 
 ## Modify SSHD parameters
 
-In this section, we will demonstrate the affects of changing some parameters in above configuration files. 
+In this section, we will demonstrate the affects of changing some parameters in `/etc/ssh/sshd_config` file. 
 As most configuration files resides under `/etc`, root user or sudo priviliges are required. 
+
+`/etc/ssh/sshd_config` manipulates the behavior of SSHD daemon, so it directly affects clients that are connecting to the server. 
+
+Do the following on the machine that acts as SSH server: 
+
+`sudo vim /etc/ssh/sshd_config`
+
+  <details>
+  <summary>Allow Public Key Authentication, Disable Password Authentication</summary><br>
+  
+  + Edit
+    
+  </details>
+  
+  <details>
+  <summary>Disable Root Login</summary><br>
+  
+  + Find parameter _PermitRootLogin_, and change its value to _**no**_.<br>
+  + Uncomment the line, and save the updated file.<br>
+  
+    <img width="191" height="97" alt="image" src="https://github.com/user-attachments/assets/1170ac7d-4b6d-42a4-bedb-27e4db9df495" />
+
+  + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
+  + From client, try using user root to login to server. Connection will be denied. 
+    
+  </details>
+
 
 
 ## Outro
