@@ -131,7 +131,10 @@ Connecting using SSH is simple.
 
 The syntax is `ssh <user-name>@<ip-address/hostname> -p <port-number>`. <br>
 
-_<port-number>_ and _<user-name>_ can be omitted, in which it will default to port 22 and current user triggering the command.
+`_<port-number>_` and `_<user-name>_` can be omitted, in which it will default to port 22 and current user triggering the command.
+
+<img width="801" height="401" alt="image" src="https://github.com/user-attachments/assets/d670e157-aede-4b20-ac60-02d51fd236ec" />
+
 
 ## Modify SSHD parameters
 
