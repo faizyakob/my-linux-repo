@@ -82,6 +82,8 @@ SSH makes use of many configuration files, depending on its usage context: <br>
   🔑 Authentication-related files (on both ends) <br>
   🧰 Supporting files <br>
 
+Without modifying the default values in this file, SSH should already been working once you installed it. Parameters on these files are used to provide more granular control for in using SSH to connect to, or receive connections from. 
+
   ### Server-side (SSH Daemon) files
 
   | File | Usage | 
@@ -92,6 +94,34 @@ SSH makes use of many configuration files, depending on its usage context: <br>
   |`/var/log/auth.log` or `/var/log/secure`|Where SSH authentication events are logged (depends on distro).|
 
   `/etc/ssh/sshd_config` is the most common file that is modified, as it affects behavior when client is connecting to this host. Some of important parameters are _PermitRootLogin_, _Port_, _PasswordAuthentication_ and _PubkeyAuthentication_. In [Modify SSHD parameters](#modify-sshd-parameters), we demonstrate on how to modify some of these parameters.
+
+  ### Client-side (User SSH configuration and cache)
+
+  These files are used by the SSH client binaries (`ssh`, `scp`, `sftp`, etc.).
+
+  | File | Usage | 
+  |------|-------|
+  | `/etc/ssh/ssh_config`| System-wide defaults for SSH **clients**. | 
+  |`~/.ssh/config`|User-specific SSH client config file. Lets you define shortcuts (_Host_, _User_, _Port_, _IdentityFile_, etc.). Example content: <br> _Host_ myserver<br> _HostName_ 192.168.1.10<br> _User_ faiz<br> _IdentityFile_ ~/.ssh/id_ed25519|
+  | `~/.ssh/known_hosts`| Stores **public keys of remote servers** you’ve connected to — used to verify the server’s identity and prevent MITM attacks. | 
+  |`~/.ssh/id_rsa`, `~/.ssh/id_ed25519`, etc.|Your private key(s) used for authentication. Keep these secret!|
+  |`~/.ssh/id_rsa.pub`, `~/.ssh/id_ed25519.pub`, etc.|The corresponding public key(s) you share with remote servers (via `authorized_keys`).|
+
+  ### Authentication-related files (on both ends)
+
+  | File | Usage | 
+  |------|-------|
+  | `~/.ssh/authorized_keys`| On the **server**, lists public keys allowed to log in as this user. |
+  | `/etc/ssh/ssh_known_hosts`| System-wide known_hosts list for all users (less common now). |
+
+  ### Supporting files
+
+  | File | Usage | 
+  |------|-------|
+  | `/etc/hosts.allow`, `/etc/hosts.deny`| Existence of these files are used to allow/deny SSH access (if enabled). |
+  | `/etc/pam.d/sshd`| PAM (Pluggable Authentication Module) config for SSH login policies. |
+
+  `/etc/pam.d/sshd` is used in more advance scenario, for example security-related. 
 
 ## Modify SSHD parameters
 ## Outro
