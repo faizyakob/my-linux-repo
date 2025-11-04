@@ -124,6 +124,11 @@ Without modifying the default values in this file, SSH should already been worki
   `/etc/pam.d/sshd` is used in more advance scenario, for example security-related. 
 
 ## Modify SSHD parameters
+
+In this section, we will demonstrate the affects of changing some parameters in above configuration files. 
+As most configuration files resides under `/etc`, root user or sudo priviliges are required. 
+
+
 ## Outro
 
 As we are using local repositories, Red Hat will keep displaying the message to encourage registering the VM to entitlement server. 
