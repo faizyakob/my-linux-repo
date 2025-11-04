@@ -166,7 +166,18 @@ Do the following on the machine that acts as SSH server:
   + From client, try using user root to login to server. Connection will be denied. 
     
   </details>
-
+  <details>
+  <summary>Allow only specific user</summary><br>
+  
+  + Edit
+    
+  </details>
+   <details>
+  <summary>Use different port</summary><br>
+  
+  + Edit
+    
+  </details>
 
 
 ## Outro
