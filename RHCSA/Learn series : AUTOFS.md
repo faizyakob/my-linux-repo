@@ -355,13 +355,13 @@ Run the following commands as root user.
 
 Once we have configured **autofs** in previous section, let's try it. 
 
-  + Direct mapping
+  + Direct mapping <br>
       Change directory to ```/mnt/direct```, and create a test file. <br>
       This file should be visible in NFS server's ```/srv/nfs/direct``` directory and vice versa.<br>
       <img width="440" height="60" alt="image" src="https://github.com/user-attachments/assets/fe33fbb5-5f2e-4c00-8367-280e3786db51" /><br>
       <img width="572" height="60" alt="image" src="https://github.com/user-attachments/assets/6b8a2bc8-0e50-4951-80f2-139e90f9a20b" /><br>
 
-  + Indirect mapping
+  + Indirect mapping <br>
       Change directory to ```/mnt/indirect/share1```, and create a test file. <br>
       This file should be visible in NFS server's ```/srv/nfs/indirect``` directory and vice versa.<br>
       <img width="584" height="114" alt="image" src="https://github.com/user-attachments/assets/9282ab3d-faef-49f8-8035-dfd365277a0a" /><br>
