@@ -143,7 +143,7 @@ As most configuration files resides under `/etc`, root user or sudo priviliges a
 
 `/etc/ssh/sshd_config` manipulates the behavior of SSHD daemon, so it directly affects clients that are connecting to the server. 
 
-Do the following on the machine that acts as SSH server: 
+Do the following tasks on the machine that acts as SSH server: 
 
 `sudo vim /etc/ssh/sshd_config`
 
@@ -179,10 +179,16 @@ Do the following on the machine that acts as SSH server:
     
   </details>
 
-
 ## Outro
 
-As we are using local repositories, Red Hat will keep displaying the message to encourage registering the VM to entitlement server. 
-This is expected and can safely be ignored. 
+Using SSH is an essential skill in investigating issues. It's the very basic of Linux administration, so the more we are familiar with it, the better. For issues involving SSH itself, check the _/var/log/secure_ and **journalctl** outputs, which can often pinpoint the issue. 
 
-Note that the limitation of using local repositories is that it's limited to packages available in the ISO image file. If it does not contain packages that we want, we still need to use online repositories for that. 
+Learning-wise, there are resources where we can learn more about SSH. A good start of course will be the _man_ pages themselves. 
+
+`man ssh`
+`man sshd_config`
+
+
+
+
+
