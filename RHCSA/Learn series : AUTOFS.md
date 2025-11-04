@@ -389,7 +389,7 @@ Once we have configured **autofs** in previous section, let's try it.
 
       **autofs** takes care of mounting the correct remote directories, using the username as the key. <br>
 
-      We can verify **autofs** is at work by verifyign the current mount usage.<br>
+      We can verify **autofs** is at work by verifying the current mount usage.<br>
       ```
       mount | grep autofs
       ```
