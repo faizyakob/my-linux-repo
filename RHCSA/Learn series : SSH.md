@@ -241,18 +241,41 @@ Before we can use the key pair created in previous session, we need to toggle on
   We can change the default port 22 to other port.
   However, this will need additional configuration involving SELinux.
 
-  + 
+  + Add additional "Port" parameter under existing one, specifying intended port number.
     
+    <img width="238" height="107" alt="image" src="https://github.com/user-attachments/assets/d726c1b7-adce-4e77-a1cd-664d8aff92c4" />
+
+  + Add SELinux rules to port.
+    ```
+    semanage port -a -t ssh_port_t -p tcp 5000
+    ```
+    <img width="1267" height="61" alt="image" src="https://github.com/user-attachments/assets/f8bcb04a-020f-4e7a-89d8-ed5c4012c0e3" />
+
+  + Add firewall rule to allow port access
+    ```
+    firewall-cmd --permanent --add-port=5000/tcp
+    firewall-cmd --reload
+    ```
+    <img width="1267" height="79" alt="image" src="https://github.com/user-attachments/assets/e396ba67-f280-4f54-aae7-af1cfd02c332" />
+
+  + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
+  + SSH using new port, and it should now work.
+    
+    <img width="1264" height="310" alt="image" src="https://github.com/user-attachments/assets/902ab82d-e9e7-419e-afa5-749e9decae46" />
+
   </details>
+
+There are many more parameters we can modify to change behavior of SSH. 
+Learning-wise, there are resources where we can learn more about SSH. A good start of course will be the _man_ pages themselves. 
+
+`man ssh`<br>
+`man sshd_config`
 
 ## Outro
 
 Using SSH is an essential skill in investigating issues. It's the very basic of Linux administration, so the more we are familiar with it, the better. For issues involving SSH itself, check the _/var/log/secure_ and **journalctl** outputs, which can often pinpoint the issue. 
 
-Learning-wise, there are resources where we can learn more about SSH. A good start of course will be the _man_ pages themselves. 
 
-`man ssh`
-`man sshd_config`
 
 
 
