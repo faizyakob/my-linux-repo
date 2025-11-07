@@ -216,7 +216,8 @@ Before we can use the key pair created in previous session, we need to toggle on
   
   <details>
   <summary>Disable Root Login</summary><br>
-  
+  We can disable root login, to prevent superuser access to the server. 
+    
   + Uncomment the parameter _PermitRootLogin_, and change its value to "no".<br>
   
     <img width="191" height="97" alt="image" src="https://github.com/user-attachments/assets/1170ac7d-4b6d-42a4-bedb-27e4db9df495" />
@@ -226,15 +227,22 @@ Before we can use the key pair created in previous session, we need to toggle on
     
   </details>
   <details>
-  <summary>Allow only specific user</summary><br>
+  <summary>Allow only specific users</summary><br>
   
-  + Edit
+  To further restrict access, we can specify only subset of users that are allow to log in.
+
+  + Add line "AllowUsers username1 username2".
+  + SSH will allow only those users to log in. Other non-specified users will be denied access.
+    <img width="352" height="63" alt="image" src="https://github.com/user-attachments/assets/9ac5572d-6fe9-4347-87a2-8fd24ae8f0ef" />
     
   </details>
    <details>
   <summary>Use different port</summary><br>
   
-  + Edit
+  We can change the default port 22 to other port.
+  However, this will need additional configuration involving SELinux.
+
+  + 
     
   </details>
 
