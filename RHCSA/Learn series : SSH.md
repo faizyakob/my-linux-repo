@@ -135,6 +135,15 @@ The syntax is `ssh <user-name>@<ip-address/hostname> -p <port-number>`. <br>
 
 <img width="801" height="401" alt="image" src="https://github.com/user-attachments/assets/d670e157-aede-4b20-ac60-02d51fd236ec" />
 
+If this is the first time attempt a client is connecting to a server, note the error message prompting for confirmation. Once connected, the public key of the remote server will be stored in `~/.ssh/known_hosts` on the client, while on the server, the `~/.ssh/authorized_keys` will be populated with the public key of the client.
+
+We can have more insights on the connection attempt by supplying `-v` (up to 3) option to above command. For example, to have more outputs on the connecting process, run command: 
+
+```
+ssh -vvv <user-name>@<ip-address/hostname> -p <port-number>
+```
+
+
 
 ## Modify SSHD parameters
 
@@ -148,7 +157,19 @@ Do the following tasks on the machine that acts as SSH server:
 `sudo vim /etc/ssh/sshd_config`
 
   <details>
-  <summary>Allow Public Key Authentication, Disable Password Authentication</summary><br>
+  <summary>Allow Public Key Authentication</summary><br>
+  
+  Aside from using username & password, SSH also supports using public and private key pair for login in into a server. Using key pair is obviously more secure. However, both methods can exists simultaneuosly. 
+
+Before using key pair method, we need to generate the public & private key. 
+
+
+    
+  </details>
+
+   <details>
+     
+  <summary>Disable Password Authentication</summary><br>
   
   + Edit
     
