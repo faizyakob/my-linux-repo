@@ -208,15 +208,16 @@ Before we can use the key pair created in previous session, we need to toggle on
 
   + Uncomment the parameter _PasswordAuthentication_ & ensure its value is "no".
   + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
+  + Attempt to server from client, using a user who does not have key pair method configured. SSH attempt will be denied.
+    <img width="1265" height="154" alt="image" src="https://github.com/user-attachments/assets/c110ff13-5318-4858-b578-b1eaa46e86a1" />
+ <br>
  
-    
   </details>
   
   <details>
   <summary>Disable Root Login</summary><br>
   
-  + Find parameter _PermitRootLogin_, and change its value to _**no**_.<br>
-  + Uncomment the line, and save the updated file.<br>
+  + Uncomment the parameter _PermitRootLogin_, and change its value to "no".<br>
   
     <img width="191" height="97" alt="image" src="https://github.com/user-attachments/assets/1170ac7d-4b6d-42a4-bedb-27e4db9df495" />
 
