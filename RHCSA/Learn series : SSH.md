@@ -145,7 +145,28 @@ We can have more insights on the connection attempt by supplying `-v` (up to 3) 
 ssh -vvv <user-name>@<ip-address/hostname> -p <port-number>
 ```
 
+## Generate private and public key pair.
 
+SSH also supports using public and private key pair for login in into a server. Using key pair is obviously more secure. However, both methods can exists simultaneuosly. 
+
++ On the client machine, generate the key pair.
+
+  ```
+  ssh-keygen -t rsa
+  ```
+   <img width="1263" height="405" alt="image" src="https://github.com/user-attachments/assets/039fea81-d427-4938-a6a2-cf9b1a53c4fc" />
+
+  <br>
+
+  Passphrase is optional. <br>
+
+  The default name for the key pair is `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` for private key & public key    respectively. You can provide different name.
+
++ Transfer generated public key to remote machine.
+  ```
+  ssh-copy-id <user-name>@<ip-address/hostname>
+  ```
+  
 
 ## Modify SSHD parameters
 
@@ -161,29 +182,10 @@ Do the following tasks on the machine that acts as SSH server:
   <details>
   <summary>Allow Public Key Authentication</summary><br>
   
-  Aside from using username & password, SSH also supports using public and private key pair for login in into a server. Using key pair is obviously more secure. However, both methods can exists simultaneuosly. 
-
-+ Before using key pair method, generate the public & private key.
-  ==== DO THIS STEP ON THE CLIENT machine ====
-
-  ```
-  ssh-keygen -t rsa
-  ```
-   <img width="1263" height="405" alt="image" src="https://github.com/user-attachments/assets/039fea81-d427-4938-a6a2-cf9b1a53c4fc" />
-
-  <br>
-
-  Passphrase is optional. <br>
-
-  The default name for the key pair is `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` for private key & public key    respectively. You can provide different name.
-  
-  ======================================== ====
+Before we can use the key pair created in previous session, we need to toggle on the option. 
 
 + In `/etc/ssh/sshd_config` file, uncomment the parameter _PubkeyAuthentication_ & ensure its value is "yes".
 + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
-
-
-
 
 
   </details>
