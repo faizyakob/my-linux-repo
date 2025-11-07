@@ -167,6 +167,12 @@ SSH also supports using public and private key pair for login in into a server. 
   ssh-copy-id <user-name>@<ip-address/hostname>
   ```
   
+  <img width="1269" height="186" alt="image" src="https://github.com/user-attachments/assets/09062418-24e2-42c3-9d9f-94c1354b5d6e" />
+  <br>
+  
+  Above command assumes default name is used for public key. If you use custom name, specify the public key with `-i` option.
+
+> Note: Each user will need its own unique key pair.
 
 ## Modify SSHD parameters
 
@@ -186,7 +192,8 @@ Before we can use the key pair created in previous session, we need to toggle on
 
 + In `/etc/ssh/sshd_config` file, uncomment the parameter _PubkeyAuthentication_ & ensure its value is "yes".
 + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
-
++ SSH from client to server. It should not prompt for password.
+  <img width="1269" height="287" alt="image" src="https://github.com/user-attachments/assets/63708868-f485-4579-8c0b-896e33dc6db0" />
 
   </details>
 
