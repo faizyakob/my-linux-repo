@@ -6,6 +6,7 @@
 - [View SSHD service status](#view-sshd-service-status)
 - [View SSHD configuration files](#view-sshd-configuration-files)
 - [Connecting using SSH](#connecting-using-ssh)
+- [Generate_private_and_public_key_pair](#generate-private-and-public-key-pair)
 - [Modify SSHD parameters](#modify-sshd-parameters)
 - [Outro](#outro)
 
@@ -145,9 +146,9 @@ We can have more insights on the connection attempt by supplying `-v` (up to 3) 
 ssh -vvv <user-name>@<ip-address/hostname> -p <port-number>
 ```
 
-## Generate private and public key pair.
+## Generate private and public key pair
 
-SSH also supports using public and private key pair for login in into a server. Using key pair is obviously more secure. However, both methods can exists simultaneuosly. 
+SSH also supports using public and private key pair for login in into a server. Using key pair is obviously more secure. However, both password & key pair methods can exist simultaneuosly. 
 
 + On the client machine, generate the key pair.
 
@@ -190,7 +191,7 @@ Do the following tasks on the machine that acts as SSH server:
   
 Before we can use the key pair created in previous session, we need to toggle on the option. 
 
-+ In `/etc/ssh/sshd_config` file, uncomment the parameter _PubkeyAuthentication_ & ensure its value is "yes".
++ Uncomment the parameter _PubkeyAuthentication_ & ensure its value is "yes".
 + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
 + SSH from client to server. It should not prompt for password.
   <img width="1269" height="287" alt="image" src="https://github.com/user-attachments/assets/63708868-f485-4579-8c0b-896e33dc6db0" />
@@ -201,7 +202,13 @@ Before we can use the key pair created in previous session, we need to toggle on
      
   <summary>Disable Password Authentication</summary><br>
   
-  + Edit
+  We can further improve security on the server by disabling password authentication altogether.
+
+  ⚠️ Be aware that we must have alternative authentication method configured before disabling password authentication. Configuring key pair is one option. Otherwise, we will be lock out of the system.⚠️
+
+  + Uncomment the parameter _PasswordAuthentication_ & ensure its value is "no".
+  + Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
+ 
     
   </details>
   
