@@ -134,7 +134,9 @@ The syntax is `ssh <user-name>@<ip-address/hostname> -p <port-number>`. <br>
 `_<port-number>_` and `_<user-name>_` can be omitted, in which it will default to port 22 and current user triggering the command.
 
 <img width="801" height="401" alt="image" src="https://github.com/user-attachments/assets/d670e157-aede-4b20-ac60-02d51fd236ec" />
+<br>
 
+<br>
 If this is the first time attempt a client is connecting to a server, note the error message prompting for confirmation. Once connected, the public key of the remote server will be stored in `~/.ssh/known_hosts` on the client, while on the server, the `~/.ssh/authorized_keys` will be populated with the public key of the client.
 
 We can have more insights on the connection attempt by supplying `-v` (up to 3) option to above command. For example, to have more outputs on the connecting process, run command: 
@@ -161,10 +163,29 @@ Do the following tasks on the machine that acts as SSH server:
   
   Aside from using username & password, SSH also supports using public and private key pair for login in into a server. Using key pair is obviously more secure. However, both methods can exists simultaneuosly. 
 
-Before using key pair method, we need to generate the public & private key. 
++ Before using key pair method, generate the public & private key.
+  ==== DO THIS STEP ON THE CLIENT machine ====
+
+  ```
+  ssh-keygen -t rsa
+  ```
+   <img width="1263" height="405" alt="image" src="https://github.com/user-attachments/assets/039fea81-d427-4938-a6a2-cf9b1a53c4fc" />
+
+  <br>
+
+  Passphrase is optional. <br>
+
+  The default name for the key pair is `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` for private key & public key    respectively. You can provide different name.
+  
+  ======================================== ====
+
++ In `/etc/ssh/sshd_config` file, uncomment the parameter _PubkeyAuthentication_ & ensure its value is "yes".
++ Restart sshd daemon using `sudo systemctl restart sshd; sudo systemctl daemon-reload`.
 
 
-    
+
+
+
   </details>
 
    <details>
