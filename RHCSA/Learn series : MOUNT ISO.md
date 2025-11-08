@@ -57,10 +57,11 @@ As root user, follow below steps.
 
   1. Use `dd` utility to copy the ISO block device as a file.
      
-    ```
-     dd if=/dev/sr0 of=/rhel9.iso bs=1M
-    ```
-    <img width="635" height="94" alt="image" src="https://github.com/user-attachments/assets/00147173-1b49-4324-a215-559a40731c60" />
+      ```
+      dd if=/dev/sr0 of=/rhel9.iso bs=1M
+      ```
+      
+  <img width="635" height="94" alt="image" src="https://github.com/user-attachments/assets/00147173-1b49-4324-a215-559a40731c60" />
 
   2. Edit _/etc/fstab_ and mount the file onto directory created in Step 2. Use `iso9660` as filesystem type.
      
