@@ -53,7 +53,7 @@ Next section describes the steps in details.
      
   <img width="1019" height="601" alt="image" src="https://github.com/user-attachments/assets/3e14ee34-ff00-4d46-b567-1e79d6fbfb10" />
 
-  This tells the system to run `bash` as the first process. 
+  This tells the system to run `bash` as the first process on next reboot. 
 
   Hit CTRL+X to reboot again from GRUB menu. 
 
@@ -97,8 +97,8 @@ Next section describes the steps in details.
   System should reboot passed the GRUB menu and into GNOME. 
 
   Log in as a normal user. 
-
-    <img width="1276" height="829" alt="image" src="https://github.com/user-attachments/assets/c02a157a-c03e-4032-989f-17d8ffddd101" />
+  
+  <img width="1276" height="829" alt="image" src="https://github.com/user-attachments/assets/ac8d86f4-51ca-441d-8cd6-8e7269922f00" />
 
   Once inside, switch to root password. The new password should be enforced now. 
 
@@ -108,7 +108,7 @@ Next section describes the steps in details.
 
   <img width="1167" height="195" alt="image" src="https://github.com/user-attachments/assets/1b0814d1-1669-45b8-88b4-49514a9b6f86" />
 
-
+## Tips
 
 ## Outro
 
