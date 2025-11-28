@@ -110,11 +110,52 @@ Next section describes the steps in details.
 
 ## Tips
 
+We might encounter few challenges when performing root password reset. What I have personnaly encountered were the followings: 
+
+:trollface: GRUB menu does not appear at all
+
+I did some googling and this seems to be a problem when running VMwareFusion and ARM64 architecture. Pressing 'e' won't have any effect and VM will continually boot into GNOME. 
+
+
+To fix this edit the `/etc/default/grub.cfg` and include the lines:
+
+```
+sudo vim /etc/default/grub.cfg
+```
+
++ GRUB_TIMEOUT_STYLE="menu"
++ GRUB_FORCE_HIDDEN_MENU="false"
++ GRUB_TIMEOUT="10"          # This is just to make GRUB menu appears longer
+
+<img width="1434" height="312" alt="image" src="https://github.com/user-attachments/assets/e86fc9e1-0838-46b7-b534-cc4bc590dee9" />
+
+
+Recreate the `grub.cfg` file. 
+
+```
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+<img width="1279" height="311" alt="image" src="https://github.com/user-attachments/assets/b9c0072f-c912-489a-8ff5-cc999b2ded06" />
+
+:trollface: GRUB menu still does not appear
+
+If it still does not appear, then we can force the GRUB menu to appear. 
+
+```
+sudo grub2-editenv - unset menu_auto_hide
+sudo grub2-editenv list
+```
+Ensure the parameter "_menu_auto_hide_" no longer appears in the result. On next reboot GRUB menu should appear.
+
+<img width="1434" height="117" alt="image" src="https://github.com/user-attachments/assets/391e5f90-4c38-475a-8b4e-d6b6f217e414" />
+
+There could be caused by other cases as well like fastboot. This needs to be checked manually per application basis (VMware, Hyper-V, etc..). However above 2 should fix it in most cases. 
+
+
 ## Outro
 
-As we are using local repositories, Red Hat will keep displaying the message to encourage registering the VM to entitlement server. 
-This is expected and can safely be ignored. 
-
-Note that the limitation of using local repositories is that it's limited to packages available in the ISO image file. If it does not contain packages that we want, we still need to use online repositories for that. 
+Resetting a root password should not be used to hack into the system. 
+The procedure assumed individual performing this is authorized to do so, as there is no filtering done by the Linux VM itself. 
+Therefore, it is crucial access to the VM is restricted using VPN or firewall. 
 
 
