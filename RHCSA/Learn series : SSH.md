@@ -1,5 +1,5 @@
 
-=== WORK IN PROGRESS ===
+
 ## Table of contents
 
 - [Introduction](#introduction)
