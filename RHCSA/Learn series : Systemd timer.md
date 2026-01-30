@@ -21,6 +21,7 @@ A `hello.timer` that runs it periodically.
 How to inspect, debug, and compare with cron.
 
 We first go through systemd timer concepts and how it works. 
+Then we briefly compares it with cron, before ending it with common mistakes (and how to avoid them) & key takeaways.
 
 ### Concept
 
@@ -249,25 +250,29 @@ Which one to utilize depends on use case. However, Systemd timer is more modern 
 ### Common mistakes and debugging tips
 
 ❌ **Using** `Type=simple`<br>
-Timers expect the service to finish.
+Timers expect the service to finish.<br>
+
 Use: 
 ```
 Type=oneshot
 ```
 
 ❌ **Forgetting** `daemon-reload`<br>
+
 Any time you change unit files:
 ```
 systemctl daemon-reload
 ```
 
 ❌ **Enabling the service instead of the timer**<br>
+
 You usually **enable only the timer**:
 ```
 systemctl enable --now hello.timer
 ```
 
 ❌ **Expecting output on stdout**<br>
+
 Use:
 - files
 - logger
