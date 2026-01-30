@@ -2,11 +2,10 @@
 
 - [Introduction](#introduction)
 - [Concept](#concept)
-- [How it works](#whow-it-works)
+- [How it works](#how-it-works)
 - [Configuring demo service using systemd timer](#configuring-demo-service-using-systemd-timer)
-- [Checking the systemd timer is working](#checking-the-systemd-timer-is-working)
-- [Comparison with cronjob](#comparison-with-cronjob)
-- [Tips and outro](#tips-and-outro)
+- [Common mistakes and debugging tips](#common-mistakes-and-debugging-tips)
+- [Cleanup and key takeaways](#cleanup-and-key-takeaways)
 
 ### Introduction
 
@@ -72,15 +71,171 @@ In short:
 ### Configuring demo service using systemd timer
 
 In this section we cover creating a simple `hello.service` that output a log, and then enable this service via its timer unit, `hello.timer`. As with everything Linux, we can run a service as root, or as normal user. 
+The choice will affect the directory in which we place both the timer and service unit files. 
+
+<details>
+  <summary> System-level example (runs as root)</summary><br>
+  
+1. Create the service
+   
+   This service writes a friendly message with a timestamp.
+
+   **File:** `/etc/systemd/system/hello.service`
+
+   ```
+   [Unit]
+   Description=Hello World faiz service
+
+   [Service]
+   Type=oneshot
+   ExecStart=/usr/bin/bash -c 'echo "Hello from systemd at $(date)" >> /var/log/hello.log'
+   ```
+   **This file contains the following to keep it simple:**
+   - `Type=oneshot` → perfect for timers
+   - No background process
+   - Visible output
+   - Piping the output lo hello.log file.
+
+2. Create the timer
+
+   **File:** `/etc/systemd/system/hello.timer`
+
+   ⚠️  Note: It is important that the name of timer MATCH EXACTLY the name of its service. This is how a timer know which unit to activate.
+
+   ```
+   [Unit]
+   Description=Run hello.service every minute
+
+   [Timer]
+   OnBootSec=30s
+   OnUnitActiveSec=1min
+   Persistent=true
+   Unit=hello.service
+
+   [Install]
+   WantedBy=timers.target
+   ```
+
+   **Explanation**
+   |Setting|Meaning|
+   |---|---|
+   |`OnBootSec=30s`|First run 30s after boot|
+   |`OnUnitActiveSec=1min`|Run every minute|
+   |`Persistent=true`|Catch up if system was off|
+   |`Unit=`|Explicit service mapping|
+   
+   🔑 Note the unit file contains [Install] section. This represents a unit that wants to have this timer activated. A **.target** is another systemd unit file that represents a group of files that must be running before satisfying the condition of the target. In this case, our timer unit will be invoked by the `timers.target` unit file, which usually used to bring up along other timer units as well when the system first boot up.
+
+   🔑 
+
+4. Enable the timer
+
+   ```
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now hello.timer
+   ```
+
+   🔑 Enabling the timer actually creates a symbolic link from the timers.target to the location of the timer unit file: _Created symlink /etc/systemd/system/timers.target.wants/hello.timer → /etc/systemd/system/hello.timer_.
+   
+6. Verify it’s scheduled
+   
+   ```
+   systemctl list-timers --all | grep hello
+   ```
+
+   <img width="1215" height="37" alt="image" src="https://github.com/user-attachments/assets/17f08044-d2c6-476d-a967-bf428bb4db6c" />
+
+7. Verify execution
+
+   **Check logs via journal**
+   ```
+   journalctl -u hello.service
+   ```
+
+   <img width="798" height="136" alt="image" src="https://github.com/user-attachments/assets/06ca5003-c3c3-4e2f-b133-e82e3f2acd25" />
+
+   **Check the output file**
+   
+   ```
+   cat /var/log/hello.log
+   ```
+
+   <img width="542" height="97" alt="image" src="https://github.com/user-attachments/assets/4b20085c-e475-48e7-8bea-c8986bf882cf" />
 
 
+</details>
 
+<details>
+  <summary> User-level timer (no root required)</summary><br>
 
-### Checking the systemd timer is working
+  Systemd timers also work **per user**, which is something cron handles poorly.
+
+  1. Create directory
+     ```
+     mkdir -p ~/.config/systemd/user
+     ```
+     
+  2. User service
+
+     **File:** `~/.config/systemd/user/hello-user.service`
+     
+     ```
+     [Unit]
+     Description=User hello service
+
+     [Service]
+     Type=oneshot
+     ExecStart=/usr/bin/echo "Hello from user timer at $(date)"
+     ```
+     
+  4. User timer
+
+     **File:** `~/.config/systemd/user/hello-user.timer`
+
+     ```
+     [Unit]
+     Description=User hello timer
+
+     [Timer]
+     OnBootSec=1min
+     OnUnitActiveSec=5min
+
+     [Install]
+     WantedBy=timers.target
+     ```
+
+  4. Enable it
+
+     ```
+     systemctl --user daemon-reload
+     systemctl --user enable --now hello-user.timer
+     ```
+     
+  5. View logs
+
+     ```
+     journalctl --user -u hello-user.service
+     ```
+  
+</details>
 
 ### Comparison with cronjob
 
-Following table simplified the comparison between cron and Systemd timer at high-level.
+We can of course achieve the preceding with **cron**: 
+
+```
+*/1 * * * * echo "Hello from systemd at $(date)" >> /var/log/hello.log
+```
+However, systemd timer provides the following: 
+- Separate schedule and execution
+- Built-in logging
+- Better error handling
+- Can depend on:
+  + network
+  + mounts
+  + other services
+
+Below table simplified the comparison between cron and Systemd timer at high-level.
 Which one to utilize depends on use case. However, Systemd timer is more modern of the two and is now the recommended approach. 
 
 | Feature | cron | systemd.timer|
@@ -91,14 +246,60 @@ Which one to utilize depends on use case. However, Systemd timer is more modern 
 |Unified management|No|Yes (`systemctl`)|
 |User-level timers|Limited|Native|
 
-### Tips and outro
+### Common mistakes and debugging tips
 
-**autofs** is used for automating the mounting of filesystems. It is most useful in multi-user environment where there are many directories mounting tasks to handle, which becoming repetitive over time. It also provides some automation with wildcard mapping, when centralized home directories is necessary to provide stricter control.
+❌ **Using** `Type=simple`
+Timers expect the service to finish.
+Use: 
+```
+Type=oneshot
+```
 
-Tips:
-1. If you are unable to change directory into the mountpoints, check the directory permission on the NFS server. Specifically for wildcard mapping, ensure each user can access its ```/home/``` directory by matching the UID.
-2. If solely using NFSv4, both **mountd** and **nfs-server** services share port 2049, so there are only 2 ports to be whitelisted. 
+❌ **Forgetting** `daemon-reload`
+Any time you change unit files:
+```
+systemctl daemon-reload
+```
 
+❌ **Enabling the service instead of the timer**
+You usually **enable only the timer**:
+```
+systemctl enable --now hello.timer
+```
 
+❌ **Expecting output on stdout**
+Use:
+- files
+- logger
+- journalctl
 
+Example:
+```
+ExecStart=/usr/bin/logger "Hello from systemd"
+```
+
+🐛 Debugging tips:
+
+|Task|Command|
+|---|---|
+|See timer state|`systemctl status hello.timer`|
+|See service logs|`journalctl -u hello.service`|
+|See all timers|`systemctl list-timers --all`|
+|Test service manually|`systemctl start hello.service`|
+
+### Cleanup and key takeaways
+
+```
+sudo systemctl disable --now hello.timer
+sudo rm /etc/systemd/system/hello.{service,timer}
+sudo systemctl daemon-reload
+```
+
+🐫 Key takeaways
+
+- Timers **trigger services**
+- Services do the actual work
+- systemd timers are more reliable than cron
+- User-level timers are first-class citizens
+- `journalctl` is your best friend
 
