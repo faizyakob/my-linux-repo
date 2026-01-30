@@ -95,7 +95,7 @@ The choice will affect the directory in which we place both the timer and servic
    - `Type=oneshot` → perfect for timers
    - No background process
    - Visible output
-   - Piping the output lo hello.log file.
+   - Piping the output to hello.log file.
 
 2. Create the timer
 
