@@ -59,7 +59,7 @@ This mapping between local mountpoints and remote directories determined how tho
 
 **autofs** uses dedicated configuration files in order to work: ```/etc/auto.master``` and/or additional configuration files under drop-in directory ```/etc/auto.master.d/```.
 
-### Types of mapping in autofs
+### What and how it works
 
 We can define 3 types of mapping in autofs: 
 + Direct mapping
