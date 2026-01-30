@@ -248,26 +248,26 @@ Which one to utilize depends on use case. However, Systemd timer is more modern 
 
 ### Common mistakes and debugging tips
 
-❌ **Using** `Type=simple`
+❌ **Using** `Type=simple`<br>
 Timers expect the service to finish.
 Use: 
 ```
 Type=oneshot
 ```
 
-❌ **Forgetting** `daemon-reload`
+❌ **Forgetting** `daemon-reload`<br>
 Any time you change unit files:
 ```
 systemctl daemon-reload
 ```
 
-❌ **Enabling the service instead of the timer**
+❌ **Enabling the service instead of the timer**<br>
 You usually **enable only the timer**:
 ```
 systemctl enable --now hello.timer
 ```
 
-❌ **Expecting output on stdout**
+❌ **Expecting output on stdout**<br>
 Use:
 - files
 - logger
