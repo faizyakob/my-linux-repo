@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Concept](#concept)
-- [What and how it works](#what-and-how-it-works)
+- [How it works](#whow-it-works)
 - [Configuring demo service using systemd timer](#configuring-demo-service-using-systemd-timer)
 - [Checking the systemd timer is working](#checking-the-systemd-timer-is-working)
 - [Comparison with cronjob](#comparison-with-cronjob)
@@ -25,11 +25,16 @@ We first go through systemd timer concepts and how it works.
 
 ### Concept
 
-🔑 A **systemd timer **is a systemd unit that schedules and triggers another unit (usually a .service) at specific times or intervals. It serves a role similar to cron, but is fully integrated into the systemd ecosystem, using the same unit model, dependency handling, logging, and state management.
+🔑 A **systemd timer** is a systemd unit that schedules and triggers another unit (usually a .service) at specific times or intervals. It serves a role similar to cron, but is fully integrated into the systemd ecosystem, using the same unit model, dependency handling, logging, and state management.
 
 In systemd, timers are **not standalone jobs**. A timer unit only defines when something should run; the actual work is defined in a corresponding **service unit**. This separation makes scheduling declarative, predictable, and easier to inspect and manage.
 
-### What and how it works
+<img width="497" height="310" alt="image" src="https://github.com/user-attachments/assets/bb259266-4e3f-42d3-b04b-de5da4035a2f" />
+
+Important idea:
+> Timers do nothing by themselves — they only trigger services.
+
+### How it works
 
 A systemd timer consists of two units:
 
@@ -63,7 +68,16 @@ Key characteristics
 
 In short:
 **The timer decides when, the service defines what, and systemd coordinates everything**.
-     
+
+### Configuring demo service using systemd timer
+
+In this section we cover creating a simple `hello.service` that output a log, and then enable this service via its timer unit, `hello.timer`. As with everything Linux, we can run a service as root, or as normal user. 
+
+
+
+
+### Checking the systemd timer is working
+
 ### Comparison with cronjob
 
 Following table simplified the comparison between cron and Systemd timer at high-level.
