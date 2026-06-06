@@ -2,14 +2,14 @@
 ### Table of contents
 
 - [Introduction](#introduction)
-- [What is PAM?](#what-is-pam?)
-- [PAM Components](#how-it-works)
-- [Example 1: PAM During sudo Authentication](#configuring-demo-service-using-systemd-timer)
-- [Example 2: PAM During SSH Authentication](#common-mistakes-and-debugging-tips)
-- [Hands-On Lab: Observe PAM Module Execution](#cleanup-and-key-takeaways)
-- [Hands-On Lab: Execute a Custom Script Using PAM](#cleanup-and-key-takeaways)
-- [Lab: Break SSH Login Using PAM (Safely)](#cleanup-and-key-takeaways)
-- [Key Takeaways)](#cleanup-and-key-takeaways)
+- [What is PAM?](#what-is-pam)
+- [PAM Components](#pam-components)
+- [Example 1: PAM During sudo Authentication](#example-1-pam-during-sudo-authentication)
+- [Example 2: PAM During SSH Authentication](#example-2-pam-during-ssh-authentication)
+- [Hands-On Lab: Observe PAM Module Execution](#hands-on-lab-observe-pam-module-execution)
+- [Hands-On Lab: Execute a Custom Script Using PAM](#hands-on-lab-execute-a-custom-script-using-pam)
+- [Lab: Break SSH Login Using PAM (Safely)](#lab-break-ssh-login-using-pam-safely)
+- [Key Takeaways](#key-takeaways)
 
 ## Linux PAM Authentication: How Modules Are Invoked During sudo and SSH
 
