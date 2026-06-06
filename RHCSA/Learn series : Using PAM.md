@@ -3,10 +3,13 @@
 
 - [Introduction](#introduction)
 - [What is PAM?](#what-is-pam?)
-- [How it works](#how-it-works)
-- [Configuring demo service using systemd timer](#configuring-demo-service-using-systemd-timer)
-- [Common mistakes and debugging tips](#common-mistakes-and-debugging-tips)
-- [Cleanup and key takeaways](#cleanup-and-key-takeaways)
+- [PAM Components](#how-it-works)
+- [Example 1: PAM During sudo Authentication](#configuring-demo-service-using-systemd-timer)
+- [Example 2: PAM During SSH Authentication](#common-mistakes-and-debugging-tips)
+- [Hands-On Lab: Observe PAM Module Execution](#cleanup-and-key-takeaways)
+- [Hands-On Lab: Execute a Custom Script Using PAM](#cleanup-and-key-takeaways)
+- [Lab: Break SSH Login Using PAM (Safely)](#cleanup-and-key-takeaways)
+- [Key Takeaways)](#cleanup-and-key-takeaways)
 
 ## Linux PAM Authentication: How Modules Are Invoked During sudo and SSH
 
