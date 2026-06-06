@@ -56,3 +56,54 @@ Applications simply ask PAM:
 > "Please authenticate this user."
 
 PAM then determines which modules to execute and in what order.
+
+### PAM Components
+
+#### PAM Configuration Files
+
+Located under `/etc/pam.d` directory.
+
+Examples:
+
+```
+/etc/pam.d/sudo
+/etc/pam.d/sshd
+/etc/pam.d/login
+/etc/pam.d/su
+```
+
+Each file defines the PAM stack for a specific service.
+
+#### PAM Modules
+
+Modules are shared libraries typically found in:
+
+```
+/usr/lib64/security/
+```
+or
+
+Examples:
+```
+pam_unix.so
+pam_limits.so
+pam_env.so
+pam_nologin.so
+pam_exec.so
+pam_warn.so
+```
+
+#### Understanding PAM Rule Syntax
+
+A PAM rule consists of:
+```
+type    control    module-path    arguments
+```
+
+Example:
+```
+auth required pam_unix.so
+```
+
+#### PAM Types
+
