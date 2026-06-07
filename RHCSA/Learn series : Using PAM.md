@@ -42,7 +42,7 @@ Application
 With PAM:
 
 ```
-Application
+ Application
       │
       ▼
  PAM Library
@@ -69,32 +69,102 @@ Located under `/etc/pam.d` directory.
 Examples:
 
 ```
-/etc/pam.d/sudo
-/etc/pam.d/sshd
 /etc/pam.d/login
+/etc/pam.d/sshd
+/etc/pam.d/sudo
 /etc/pam.d/su
+/etc/pam.d/passwd
+/etc/pam.d/crond
+/etc/pam.d/gdm-password
 ```
 
 Each file defines the PAM stack for a specific service.
 
+#### What They Are Used For
+
+| File | Service | 
+  |------|-------|
+  | `login` | Local console logins | 
+  | `sshd` | SSH authentication |
+  | `sudo` | Privilege escalation via sudo |
+  | `su` | Switching users |
+  | `passwd`| Password changes |
+  | `crond` | Cron job authentication/session handling |
+  | `gdm-password` | GNOME graphical login manager |
+
+#### Example Directory Listing
+
+<img width="1221" height="120" alt="image" src="https://github.com/user-attachments/assets/8479071d-5b55-4df0-901e-c4a59784cfd0" />
+
+
 #### PAM Modules
 
-Modules are shared libraries typically found in:
+PAM modules are shared libraries that perform authentication, authorization, account checks, or session management.
+
+Typical locations:
+
+#### RHEL/CentOS/Rocky Linux
 
 ```
 /usr/lib64/security/
 ```
-or
 
-Examples:
+#### Ubuntu/Debian
+
 ```
-pam_unix.so
-pam_limits.so
+/lib/x86_64-linux-gnu/security/
+```
+
+#### Example Directory Listing
+
+<img width="1278" height="287" alt="image" src="https://github.com/user-attachments/assets/11247f81-cbfc-45e8-ad81-29d57a388735" />
+
+Examples of modules:
+```
+pam_access.so
+pam_deny.so
 pam_env.so
-pam_nologin.so
 pam_exec.so
+pam_limits.so
+pam_localuser.so
+pam_nologin.so
+pam_permit.so
+pam_rootok.so
+pam_unix.so
 pam_warn.so
 ```
+
+There are few common include files that are shared within RHEL-based systems, such as: 
+
++ _/etc/pam.d/system-auth_
++ _/etc/pam.d/password-auth_
+  
+For Debian-based systems, following are common include files:
+
++ _/ etc/pam.d/common-auth_
++ _/ etc/pam.d/common-account_
++ _/ etc/pam.d/common-password_
++ _/ etc/pam.d/common-session_
+
+Although the filenames differ, the concept is identical: service-specific files such as `sudo` or `sshd` include shared PAM stacks that contain the actual authentication modules.
+
+
+#### Common PAM Modules
+
+| Module | Purpose | 
+  |------|-------|
+  | `pam_unix.so` | Traditional Unix password authentication using `/etc/shadow` | 
+  | `pam_rootok.so` | Allows access if the user is root |
+  | `pam_nologin.so` | Blocks logins when `/etc/nologin` exists |
+  | `pam_limits.so` | Applies resource limits from `/etc/security/limits.conf` |
+  | `pam_env.so` | Loads environment variables |
+  | `pam_exec.so` | Executes a custom script or command |
+  | `pam_access.so` | Restricts access based on rules in `/etc/security/access.conf` |
+  | `pam_localuser.so` | Allows only local users |
+  | `pam_warn.so` | Logs PAM activity for troubleshooting |
+  | `pam_deny.so` | Always fails authentication |
+  | `pam_permit.so` | Always succeeds authentication |
+
 
 #### Understanding PAM Rule Syntax
 
@@ -125,6 +195,44 @@ auth required pam_unix.so
   | requisite | Must succeed immediately |
   | sufficient | Success may short-circuit processing |
   | optional | Usually ignored |
+
+#### A Real sudo PAM Stack
+
+For example:
+
+```
+$ cat /etc/pam.d/sudo
+```
+
+```
+auth       sufficient    pam_rootok.so
+@include common-auth
+@include common-account
+@include common-session-noninteractive
+```
+
+Execution flow:
+
+```
+sudo
+ │
+ ▼
+pam_rootok.so
+ │
+ ├─ User is root? → SUCCESS
+ │                 ↓
+ │             Stop processing
+ │
+ └─ Not root
+      ↓
+common-auth
+      ↓
+pam_unix.so
+      ↓
+Password verification
+```
+
+Flow above shows that **multiple PAM modules may be invoked for a single authentication request**, and the control flags (`sufficient`, `required`, etc.) determine whether PAM continues to the next module.
 
 ### Example 1: PAM During sudo Authentication
 
