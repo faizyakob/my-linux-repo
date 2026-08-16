@@ -204,6 +204,8 @@ name="index.html" dev="sda1" ino=131074 scontext=system_u:system_r:httpd_t:s0
 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
 ```
 
+<img width="1683" height="254" alt="image" src="https://github.com/user-attachments/assets/bf528c02-8640-43a9-8a2e-c7a8605a14ae" />
+
 `scontext` (the process) is `httpd_t`. `tcontext` (the file) is `default_t`. That mismatch is the entire problem, spelled out explicitly.
 
 **Step 5 - Fix it the right way: relabel, don't disable:**
