@@ -262,6 +262,9 @@ type=AVC msg=audit(...): avc:  denied  { name_connect } for  pid=1901 comm="http
      setsebool -P httpd_can_network_connect 1
 ```
 
+<img width="1662" height="282" alt="image" src="https://github.com/user-attachments/assets/37bcbb82-6765-4bd8-ac99-7fa1b162df6f" />
+
+
 `audit2why` translates the raw AVC denial into a plain-English explanation and even gives you the exact fix - this is usually the fastest path from "denied" to "resolved" once you know it exists.
 
 **Step 3 - List and flip the boolean:**
