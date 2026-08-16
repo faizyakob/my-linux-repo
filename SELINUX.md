@@ -163,6 +163,9 @@ $ echo "hello from webdata" | sudo tee /webdata/index.html
 $ sudo tee /etc/httpd/conf.d/webdata.conf <<'EOF'
 <VirtualHost *:80>
     DocumentRoot /webdata
+    <Directory /webdata>
+        Require all granted
+    </Directory>
 </VirtualHost>
 EOF
 
